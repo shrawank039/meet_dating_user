@@ -1,0 +1,91 @@
+{
+  "project_info": {
+    "project_number": "491767391137",
+    "firebase_url": "https://meet-5b836-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "meet-5b836",
+    "storage_bucket": "meet-5b836.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:491767391137:android:e03fa458965170403f61e0",
+        "android_client_info": {
+          "package_name": "com.m.meetapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "491767391137-pi5botfm74hahpfv13qsae2kqchh60ff.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-kBvhGunzGNtTPRjNZZCj0lUjaYCyJkY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "491767391137-pi5botfm74hahpfv13qsae2kqchh60ff.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "491767391137-88sg6gjdmak5kqkg1k99cddojj94dub1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.matrixdeveloper.meet"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:491767391137:android:895efbc1b2c22b5c3f61e0",
+        "android_client_info": {
+          "package_name": "com.matrixdeveloper.meet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "491767391137-70hnvbochnv9h0vgruu02d08l0bjl1um.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.matrixdeveloper.meet",
+            "certificate_hash": "fca6ce9ba804488be2911c6642c73dbe39821332"
+          }
+        },
+        {
+          "client_id": "491767391137-pi5botfm74hahpfv13qsae2kqchh60ff.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-kBvhGunzGNtTPRjNZZCj0lUjaYCyJkY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "491767391137-pi5botfm74hahpfv13qsae2kqchh60ff.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "491767391137-88sg6gjdmak5kqkg1k99cddojj94dub1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.matrixdeveloper.meet"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
