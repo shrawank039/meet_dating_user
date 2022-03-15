@@ -11,6 +11,8 @@ import 'package:meetapp/Screens/Tab.dart';
 import 'package:meetapp/Screens/Welcome.dart';
 import 'package:meetapp/Screens/auth/login.dart';
 import 'package:meetapp/ads/ads.dart';
+import 'package:meetapp/stripe_payment.dart';
+import 'package:meetapp/stripe_test.dart';
 import 'package:meetapp/util/color.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -20,7 +22,7 @@ Future<void> main() async {
   await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp();
   Stripe.publishableKey = 'pk_test_51JZA3fSA6hepuTiIQYCbfHXMlJaTjIkbxUZ7ggB7si9GnFpCRdXQ0fQqOdvNSEAoprvC6N0xCPx2bwW3ecCVwbu300yDugmr2U';
-  //await Stripe.instance.applySettings();
+  await Stripe.instance.applySettings();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitDown,
     DeviceOrientation.portraitUp,
@@ -126,7 +128,7 @@ class _MyAppState extends State<MyApp> {
       home: isLoading
           ? Splash()
           : isRegistered
-              ? Tabbar(null, null)
+              ? StripeTest()//Tabbar(null, null)
               : isAuth
                   ? Welcome()
                   : Login(),

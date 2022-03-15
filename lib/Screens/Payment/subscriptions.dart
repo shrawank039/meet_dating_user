@@ -10,9 +10,6 @@ import 'package:meetapp/util/color.dart';
 import 'package:meetapp/util/snackbar.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:in_app_purchase/store_kit_wrappers.dart';
-
-
-
 import 'package:url_launcher/url_launcher.dart';
 import '../Profile/profile.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';

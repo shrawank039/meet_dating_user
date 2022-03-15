@@ -37,12 +37,21 @@
 </activity>
         <activity
             android:exported="true"
-            android:name="io.flutter.embedding.android.FlutterActivity"
+            android:name=".MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
             android:windowSoftInputMode="adjustResize">
+
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <meta-data
+                android:name="com.google.android.gms.wallet.api.enabled"
+                android:value="true" />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -52,9 +61,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data
-                    android:scheme="stripesdk"
-                    android:host="3ds.stripesdk.io" />
+                <data android:scheme="stripesdk" android:host="3ds.stripesdk.io" />
             </intent-filter>
             <!--For remove the 'jump' of a centered graphic on the launch screen
              https://github.com/flutter/flutter/issues/47634 -->
@@ -76,7 +83,7 @@
             android:value="default_notification_channel_id"/>
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-0000000000000000~0000000000"/>
+            android:value="ca-app-pub-5334606472230524~3390874774"/>
 
          </application>
 

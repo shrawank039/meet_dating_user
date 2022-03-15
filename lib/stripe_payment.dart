@@ -19,7 +19,7 @@ class _StripePaymentState extends State<StripeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Stripe Tutorial'),
+        title: Text('Meet Membership'),
       ),
       body: Center(
         child: InkWell(
@@ -50,10 +50,10 @@ class _StripePaymentState extends State<StripeScreen> {
               paymentIntentClientSecret: paymentIntentData!['client_secret'],
               applePay: true,
               googlePay: true,
-              testEnv: true,
-              style: ThemeMode.dark,
+             // testEnv: true,
+              style: ThemeMode.light,
               merchantCountryCode: 'US',
-              merchantDisplayName: 'ANNIE')).then((value){
+              merchantDisplayName: 'MEET')).then((value){
       });
 
 
@@ -79,6 +79,7 @@ class _StripePaymentState extends State<StripeScreen> {
         print('payment intent'+paymentIntentData!['amount'].toString());
         print('payment intent'+paymentIntentData.toString());
         //orderPlaceApi(paymentIntentData!['id'].toString());
+
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("paid successfully")));
 
         paymentIntentData = null;
@@ -114,7 +115,7 @@ class _StripePaymentState extends State<StripeScreen> {
           body: body,
           headers: {
             'Authorization':
-            'Bearer your token',
+            'Bearer sk_test_51JZA3fSA6hepuTiIHe0JmkesB8hOdPOeJGGSdemRXagVCvlp2SeAyngK6d7xj18s4G4m27RYCQw5QOsWXXlkVu9b00r0MdgP0J',
             'Content-Type': 'application/x-www-form-urlencoded'
           });
       print('Create Intent reponse ===> ${response.body.toString()}');
