@@ -5,14 +5,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:meetapp/Screens/Splash.dart';
 import 'package:meetapp/Screens/Tab.dart';
 import 'package:meetapp/Screens/Welcome.dart';
 import 'package:meetapp/Screens/auth/login.dart';
 import 'package:meetapp/ads/ads.dart';
-import 'package:meetapp/stripe_payment.dart';
-import 'package:meetapp/stripe_test.dart';
 import 'package:meetapp/util/color.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -21,8 +18,6 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp();
-  Stripe.publishableKey = 'pk_test_51JZA3fSA6hepuTiIQYCbfHXMlJaTjIkbxUZ7ggB7si9GnFpCRdXQ0fQqOdvNSEAoprvC6N0xCPx2bwW3ecCVwbu300yDugmr2U';
-  await Stripe.instance.applySettings();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitDown,
     DeviceOrientation.portraitUp,
@@ -105,17 +100,17 @@ class _MyAppState extends State<MyApp> {
     if (itemList.data()!['spanish'] == true &&
         itemList.data()!['english'] == false) {
       setState(() {
-        EasyLocalization.of(context)!.setLocale(Locale('es', 'ES'));
+        EasyLocalization.of(context)?.setLocale(Locale('es', 'ES'));
       });
     }
     if (itemList.data()!['english'] == true &&
         itemList.data()!['spanish'] == false) {
       setState(() {
-        EasyLocalization.of(context)!.setLocale(Locale('en', 'US'));
+        EasyLocalization.of(context)?.setLocale(Locale('en', 'US'));
       });
     }
 
-    return EasyLocalization.of(context)!.locale;
+    return EasyLocalization.of(context)?.locale;
   }
 
   @override
@@ -128,7 +123,7 @@ class _MyAppState extends State<MyApp> {
       home: isLoading
           ? Splash()
           : isRegistered
-              ? StripeTest()//Tabbar(null, null)
+              ? Tabbar(null, null)
               : isAuth
                   ? Welcome()
                   : Login(),
