@@ -71,10 +71,10 @@ android {
 
     signingConfigs {
         release {
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
-            storePassword keystoreProperties['storePassword']
+            keyAlias keystoreProperties['meet']
+            keyPassword keystoreProperties['meet@matrix003']
+            storeFile keystoreProperties['/Users/shrawan/StudioProjects/meet_dating/android/app/meet'] ? file(keystoreProperties['meet']) : null
+            storePassword keystoreProperties['meet@matrix003']
         }
     }
     buildTypes {

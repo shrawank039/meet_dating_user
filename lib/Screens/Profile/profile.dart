@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:card_swiper/card_swiper.dart';
 import 'package:meetapp/Screens/Information.dart';
 import 'package:meetapp/Screens/Payment/paymentDetails.dart';
 import 'package:meetapp/Screens/Profile/EditProfile.dart';

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mapbox_autocomplete/flutter_mapbox_autocomplete.dart';
-import 'package:geocoder2/geocoder2.dart';
 import 'package:meetapp/Screens/seach_location.dart';
 import 'package:meetapp/util/color.dart';
 import 'package:location/location.dart' as loc;
-//import 'package:geocoder/geocoder.dart';
+import 'package:meetapp/geocoder/geocoder.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class UpdateLocation extends StatefulWidget {
@@ -13,7 +12,7 @@ class UpdateLocation extends StatefulWidget {
 }
 
 class _UpdateLocationState extends State<UpdateLocation> {
-  late Map _newAddress;
+  Map? _newAddress;
   @override
   void initState() {
     getLocationCoordinates().then((updateAddress) {
@@ -38,7 +37,7 @@ class _UpdateLocationState extends State<UpdateLocation> {
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
           subtitle: Text(_newAddress != null
-              ? _newAddress['PlaceName'] ?? 'Fetching..'.tr().toString()
+              ? _newAddress!['PlaceName'] ?? 'Fetching..'.tr().toString()
               : 'Unable to load...'.tr().toString()),
           leading: Icon(
             Icons.location_searching_rounded,
@@ -102,22 +101,14 @@ Future<Map?> getLocationCoordinates() async {
 Future coordinatesToAddress({latitude, longitude}) async {
   try {
     Map<String, dynamic> obj = {};
+    final coordinates = Coordinates(latitude, longitude);
+    List<Address> result =
+    await Geocoder.local.findAddressesFromCoordinates(coordinates);
+    String currentAddress =
+        "${result.first.locality ?? ''} ${result.first.subLocality ?? ''} ${result.first.subAdminArea ?? ''} ${result.first.countryName ?? ''}, ${result.first.postalCode ?? ''}";
 
-    // final coordinates = Coordinates(latitude, longitude);
-    // List<Address> result =
-    //     await Geocoder.local.findAddressesFromCoordinates(coordinates);
-    // String currentAddress =
-    //     "${result.first.locality ?? ''} ${result.first.subLocality ?? ''} ${result.first.subAdminArea ?? ''} ${result.first.countryName ?? ''}, ${result.first.postalCode ?? ''}";
-
-    GeoData data = await Geocoder2.getDataFromCoordinates(
-        latitude: latitude,
-        longitude: longitude,
-        googleMapApiKey: "AIzaSyAORjh8SfEgDbmacenHkgmPgiFY9Oz0X-s");
-
-    var first = data.address;
-
-    print(first);
-    obj['PlaceName'] = first;
+    print(currentAddress);
+    obj['PlaceName'] = currentAddress;
     obj['latitude'] = latitude;
     obj['longitude'] = longitude;
 

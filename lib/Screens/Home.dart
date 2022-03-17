@@ -1,16 +1,16 @@
 import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:card_swiper/card_swiper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:meetapp/Screens/Information.dart';
 import 'package:meetapp/Screens/Payment/subscriptions.dart';
 import 'package:meetapp/Screens/Tab.dart';
 import 'package:meetapp/ads/ads.dart';
 import 'package:meetapp/models/user_model.dart';
 import 'package:meetapp/util/color.dart';
-import 'package:swipe_stack/swipe_stack.dart';
+import 'package:meetapp/swipe_stack/swipe_stack.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 List userRemoved = [];

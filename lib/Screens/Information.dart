@@ -1,15 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:meetapp/Screens/Chat/Matches.dart';
 import 'package:meetapp/Screens/Profile/EditProfile.dart';
 import 'package:meetapp/Screens/reportUser.dart';
 import 'package:meetapp/models/user_model.dart';
 import 'package:meetapp/util/color.dart';
-import 'package:swipe_stack/swipe_stack.dart';
+import 'package:meetapp/swipe_stack/swipe_stack.dart';
 import 'package:easy_localization/easy_localization.dart';
-
 import 'Chat/chatPage.dart';
 
 class Info extends StatelessWidget {
