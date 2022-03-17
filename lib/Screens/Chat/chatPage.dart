@@ -14,7 +14,6 @@ import 'package:meetapp/util/color.dart';
 import 'package:meetapp/util/snackbar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-
 import 'package:permission_handler/permission_handler.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -40,9 +39,13 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   void initState() {
-    _ads.myInterstitial()
-      ..load()
-      ..show();
+    // _ads.myInterstitial()
+    //   ..load()
+    //   ..show();
+
+    _ads.createInterstitialAd();
+    _ads.showInterstitialAd();
+
     print("object    -${widget.chatId}");
     super.initState();
     chatReference =

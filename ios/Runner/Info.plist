@@ -90,8 +90,16 @@
 	<true/>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>GADApplicationIdentifier</key>
-			<string>ca-app-pub-0000000000000000~0000000000</string>
+
+			<key>GADApplicationIdentifier</key>
+            <string>ca-app-pub-5334606472230524~3390874774</string>
+            <key>SKAdNetworkItems</key>
+              <array>
+                <dict>
+                  <key>SKAdNetworkIdentifier</key>
+                  <string>cstr6suwn9.skadnetwork</string>
+                </dict>
+              </array>
 			
 	<key>CFBundleLocalizations</key>
 	<array>

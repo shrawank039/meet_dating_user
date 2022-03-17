@@ -1,10 +1,10 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_admob/firebase_admob.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:meetapp/Screens/Splash.dart';
 import 'package:meetapp/Screens/Tab.dart';
 import 'package:meetapp/Screens/Welcome.dart';
@@ -13,6 +13,7 @@ import 'package:meetapp/ads/ads.dart';
 import 'package:meetapp/util/color.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'ads/mobile_ads.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -48,8 +49,9 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     _checkAuth();
-    FirebaseAdMob.instance
-        .initialize(appId: Platform.isAndroid ? androidAdAppId : iosAdAppId);
+    MobileAds.instance.initialize();
+    // FirebaseAdMob.instance
+    //     .initialize(appId: Platform.isAndroid ? androidAdAppId : iosAdAppId);
     _getLanguage();
   }
 

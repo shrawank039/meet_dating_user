@@ -8,6 +8,7 @@ import 'package:meetapp/Screens/Information.dart';
 import 'package:meetapp/Screens/Payment/subscriptions.dart';
 import 'package:meetapp/Screens/Tab.dart';
 import 'package:meetapp/ads/ads.dart';
+import 'package:meetapp/ads/mobile_ads.dart';
 import 'package:meetapp/models/user_model.dart';
 import 'package:meetapp/util/color.dart';
 import 'package:meetapp/swipe_stack/swipe_stack.dart';
@@ -32,6 +33,7 @@ class _CardPicturesState extends State<CardPictures>
   // TabbarState state = TabbarState();
   bool onEnd = false;
   Ads _ads = new Ads();
+  //MobAds _ads = new MobAds();
 
   GlobalKey<SwipeStackState> swipeKey = GlobalKey<SwipeStackState>();
   @override
@@ -261,9 +263,11 @@ class _CardPicturesState extends State<CardPictures>
                                                           Alignment.bottomLeft,
                                                       child: ListTile(
                                                           onTap: () {
-                                                            _ads.myInterstitial()
-                                                              ..load()
-                                                              ..show();
+                                                            // _ads.myInterstitial()
+                                                            //   ..load()
+                                                            //   ..show();
+                                                            _ads.createInterstitialAd();
+                                                            _ads.showInterstitialAd();
                                                             showDialog(
                                                                 barrierDismissible:
                                                                     false,
@@ -592,9 +596,11 @@ class _CardPicturesState extends State<CardPictures>
   void _adsCheck(count) {
     print(count);
     if (count % 10 == 0) {
-      _ads.myInterstitial()
-        ..load()
-        ..show();
+      // _ads.myInterstitial()
+      //   ..load()
+      //   ..show();
+      _ads.createInterstitialAd();
+      _ads.showInterstitialAd();
       countswipe++;
     } else {
       countswipe++;

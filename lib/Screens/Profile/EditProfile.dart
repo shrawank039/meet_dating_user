@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_admob/firebase_admob.dart';
 import 'package:meetapp/ads/ads.dart';
 import 'package:image/image.dart' as i;
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -34,7 +33,7 @@ class EditProfileState extends State<EditProfile> {
 
   var showMe;
   Map editInfo = {};
-  Ads _ads = new Ads();
+//  Ads _ads = new Ads();
 //  late BannerAd _ad;
 
   Map testMap = {'edit': 'thanks'};

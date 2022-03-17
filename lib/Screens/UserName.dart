@@ -1,4 +1,4 @@
-import 'package:firebase_admob/firebase_admob.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:meetapp/Screens/UserDOB.dart';
@@ -12,7 +12,7 @@ class UserName extends StatefulWidget {
 }
 
 //late BannerAd ad1;
-Ads ads = new Ads();
+// Ads ads = new Ads();
 
 class _UserNameState extends State<UserName> {
   Map<String, dynamic> userData = {}; //user personal info
