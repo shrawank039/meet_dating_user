@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -9,7 +8,6 @@ import 'package:meetapp/Screens/Splash.dart';
 import 'package:meetapp/Screens/Tab.dart';
 import 'package:meetapp/Screens/Welcome.dart';
 import 'package:meetapp/Screens/auth/login.dart';
-import 'package:meetapp/ads/ads.dart';
 import 'package:meetapp/util/color.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -50,8 +48,6 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     _checkAuth();
     MobileAds.instance.initialize();
-    // FirebaseAdMob.instance
-    //     .initialize(appId: Platform.isAndroid ? androidAdAppId : iosAdAppId);
     _getLanguage();
   }
 

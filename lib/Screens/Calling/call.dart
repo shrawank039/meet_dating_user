@@ -4,7 +4,6 @@ import 'package:agora_rtc_engine/rtc_remote_view.dart' as RtcRemoteView;
 import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:flutter/material.dart';
 import 'package:meetapp/util/color.dart';
-
 import 'utils/settings.dart';
 
 class CallPage extends StatefulWidget {
@@ -18,9 +17,9 @@ class CallPage extends StatefulWidget {
   /// Creates a call page with given channel name.
   const CallPage(
       {Key? key,
-      required this.channelName,
-      required this.role,
-      required this.callType})
+        required this.channelName,
+        required this.role,
+        required this.callType})
       : super(key: key);
 
   @override
@@ -67,7 +66,7 @@ class _CallPageState extends State<CallPage> {
     _addAgoraEventHandlers();
     //await _engine.enableWebSdkInteroperability(true);
     VideoEncoderConfiguration configuration = VideoEncoderConfiguration();
-    configuration.dimensions = VideoDimensions(1920, 1080);
+    configuration.dimensions = VideoDimensions(1280, 720);
     await _engine.setVideoEncoderConfiguration(configuration);
     await _engine.joinChannel(null, widget.channelName, null, 0);
   }
@@ -229,32 +228,32 @@ class _CallPageState extends State<CallPage> {
       case 1:
         return Container(
             child: Column(
-          children: <Widget>[_videoView(views[0])],
-        ));
+              children: <Widget>[_videoView(views[0])],
+            ));
       case 2:
         return Container(
             child: Column(
-          children: <Widget>[
-            _expandedVideoRow([views[0]]),
-            _expandedVideoRow([views[1]])
-          ],
-        ));
+              children: <Widget>[
+                _expandedVideoRow([views[0]]),
+                _expandedVideoRow([views[1]])
+              ],
+            ));
       case 3:
         return Container(
             child: Column(
-          children: <Widget>[
-            _expandedVideoRow(views.sublist(0, 2)),
-            _expandedVideoRow(views.sublist(2, 3))
-          ],
-        ));
+              children: <Widget>[
+                _expandedVideoRow(views.sublist(0, 2)),
+                _expandedVideoRow(views.sublist(2, 3))
+              ],
+            ));
       case 4:
         return Container(
             child: Column(
-          children: <Widget>[
-            _expandedVideoRow(views.sublist(0, 2)),
-            _expandedVideoRow(views.sublist(2, 4))
-          ],
-        ));
+              children: <Widget>[
+                _expandedVideoRow(views.sublist(0, 2)),
+                _expandedVideoRow(views.sublist(2, 4))
+              ],
+            ));
       default:
     }
     return Container();
@@ -391,13 +390,13 @@ class _CallPageState extends State<CallPage> {
             widget.callType == "VideoCall"
                 ? _viewRows()
                 : Container(
-                    alignment: Alignment.center,
-                    child: Icon(
-                      Icons.person,
-                      size: 60,
-                      color: primaryColor,
-                    ),
-                  ),
+              alignment: Alignment.center,
+              child: Icon(
+                Icons.person,
+                size: 60,
+                color: primaryColor,
+              ),
+            ),
             // _panel(),
             widget.callType == "VideoCall" ? _videoToolbar() : _audioToolbar()
           ],

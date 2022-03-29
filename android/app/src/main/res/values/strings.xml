@@ -3,12 +3,12 @@
     <string name="app_name">Meet</string>
 
     <!-- Replace "000000000000" with your Facebook App ID here. -->
-    <string name="facebook_app_id">978340875950133</string>
+    <string name="facebook_app_id">1693284571005074</string>
 
     <!--
       Replace "000000000000" with your Facebook App ID here.
       **NOTE**: The scheme needs to start with `fb` and then your ID.
     -->
-    <string name="fb_login_protocol_scheme">fb978340875950133</string>
-    <string name="facebook_client_token">0000000000000000</string>
+    <string name="fb_login_protocol_scheme">fb1693284571005074</string>
+    <string name="facebook_client_token">bc32744346b3f2fa4557f337ceccf207</string>
 </resources>

@@ -16,10 +16,10 @@ import 'package:easy_localization/easy_localization.dart';
 
 class Login extends StatelessWidget {
   //Replace your facebook id
-  static const your_client_id = '0000000000';
+  static const your_client_id = '1693284571005074';
   final FirebaseAuth _auth = FirebaseAuth.instance;
   static const your_redirect_url =
-      'https://00000000.firebaseapp.com/__/auth/handler';
+      'https://meet-5b836.firebaseapp.com/__/auth/handler';
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 

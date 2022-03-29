@@ -42,10 +42,15 @@ class EditProfileState extends State<EditProfile> {
   void initState() {
     super.initState();
     print('---------------------${widget.currentUser.phoneNumber}');
+    if(widget.currentUser.editInfo!['about'] != null)
     aboutCtlr.text = widget.currentUser.editInfo!['about'];
+    if(widget.currentUser.editInfo!['company'] != null)
     companyCtlr.text = widget.currentUser.editInfo!['company'];
+    if(widget.currentUser.editInfo!['living_in'] != null)
     livingCtlr.text = widget.currentUser.editInfo!['living_in'];
+    if(widget.currentUser.editInfo!['university'] != null)
     universityCtlr.text = widget.currentUser.editInfo!['university'];
+    if(widget.currentUser.editInfo!['job_title'] != null)
     jobCtlr.text = widget.currentUser.editInfo!['job_title'];
     setState(() {
       showMe = widget.currentUser.editInfo!['userGender'];
