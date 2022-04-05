@@ -4,7 +4,6 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:meetapp/Screens/Profile/profile.dart';
@@ -13,7 +12,6 @@ import 'package:meetapp/Screens/blockUserByAdmin.dart';
 import 'package:meetapp/Screens/notifications.dart';
 import 'package:meetapp/models/user_model.dart' as userD;
 import 'package:in_app_purchase/in_app_purchase.dart';
-
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'Calling/incomingCall.dart';
 import 'Chat/home_screen.dart';

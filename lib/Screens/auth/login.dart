@@ -77,7 +77,7 @@ class Login extends StatelessWidget {
                             height: 15,
                           ),
                           Image.asset(
-                            "asset/logo-dark.png",
+                            "assets/logo-dark.png",
                             fit: BoxFit.contain,
                           ),
                         ],

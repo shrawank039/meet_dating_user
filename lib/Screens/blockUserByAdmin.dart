@@ -22,7 +22,7 @@ class BlockUser extends StatelessWidget {
                       height: 50,
                       width: 100,
                       child: Image.asset(
-                        "asset/logo-light.png",
+                        "assets/logo-light.png",
                         fit: BoxFit.contain,
                       )),
                 )),

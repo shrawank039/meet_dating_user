@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:meetapp/Screens/UserDOB.dart';
 import 'package:meetapp/Screens/UserName.dart';
+import 'package:meetapp/constants/constants.dart';
 import 'package:meetapp/util/color.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -20,7 +21,7 @@ class _WelcomeState extends State<Welcome> {
           child: Column(
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(left: 30),
+                padding: const EdgeInsets.all(0),
                 child: Container(
                   height: MediaQuery.of(context).size.height * .8,
                   child: SingleChildScrollView(
@@ -29,78 +30,133 @@ class _WelcomeState extends State<Welcome> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         SizedBox(
-                          height: 150,
+                          height: 100,
                         ),
-                        Text(
-                          "meetapp",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 35,
-                              color: primaryColor,
-                              fontWeight: FontWeight.bold,
-                              fontStyle: FontStyle.normal),
-                        ),
+                      Center(
+                        child: Container(
+                            height: 100,
+                            width: MediaQuery.of(context).size.width,
+                            child: Image.asset(
+                              "assets/logo.png",
+                              fit: BoxFit.contain,
+                            )),
+                      ),
                         ListTile(
                           contentPadding: EdgeInsets.all(8),
                           title: Text(
-                            "Welcome to meetapp.\nPlease follow these House Rules.".tr().toString(),
+                            "Welcome to MeetApp",
+                            textAlign: TextAlign.center,
                             style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                                fontSize: 23,
+                                color: primaryColor,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: Constants.POPPINS),
+                          ),
+                          subtitle: Text(
+                            "Please follow these House Rules.",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 17, fontWeight: FontWeight.w600,
+                                color: Colors.grey.shade600,
+                            fontFamily: Constants.OPEN_SANS),
                           ),
                         ),
+                        SizedBox(
+                          height: 30,
+                        ),
                         ListTile(
-                          contentPadding: EdgeInsets.all(8),
+                          contentPadding: EdgeInsets.only(left: 20, top: 8, right: 10, bottom: 8),
+                          leading: SizedBox(
+                              height: 25,
+                              width: 25, // fixed width and height
+                              child: Image.asset('assets/images/check_mark.png')
+                          ),
                           title: Text(
                             "Be yourself.".tr().toString(),
                             style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                                fontSize: 17, fontWeight: FontWeight.w700,
+                            color: Colors.grey.shade700,
+                            fontFamily: Constants.OPEN_SANS),
                           ),
                           subtitle: Text(
                             "Make sure your photos, age, and bio are true to who you are.".tr().toString(),
                             style: TextStyle(
-                              fontSize: 17,
+                              fontSize: 15,
+                              color: Colors.grey.shade500,
+                              fontFamily: Constants.OPEN_SANS,
+                              fontWeight: FontWeight.w600
                             ),
                           ),
                         ),
                         ListTile(
-                          contentPadding: EdgeInsets.all(8),
+                          contentPadding: EdgeInsets.only(left: 20, top: 8, right: 10, bottom: 8),
+                          leading: SizedBox(
+                              height: 25,
+                              width: 25, // fixed width and height
+                              child: Image.asset('assets/images/check_mark.png')
+                          ),
                           title: Text(
                             "Play it cool.".tr().toString(),
                             style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                                fontSize: 17, fontWeight: FontWeight.w700,
+                                color: Colors.grey.shade700,
+                                fontFamily: Constants.OPEN_SANS),
                           ),
                           subtitle: Text(
                             "Respect other and treat them as you would like to be treated".tr().toString(),
                             style: TextStyle(
-                              fontSize: 17,
+                                fontSize: 15,
+                                color: Colors.grey.shade500,
+                                fontFamily: Constants.OPEN_SANS,
+                                fontWeight: FontWeight.w600
                             ),
                           ),
                         ),
                         ListTile(
-                          contentPadding: EdgeInsets.all(8),
+                          contentPadding: EdgeInsets.only(left: 20, top: 8, right: 10, bottom: 8),
+                          leading: SizedBox(
+                              height: 25,
+                              width: 25, // fixed width and height
+                              child: Image.asset('assets/images/check_mark.png')
+                          ),
                           title: Text(
                             "Stay safe.".tr().toString(),
                             style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                                fontSize: 17, fontWeight: FontWeight.w700,
+                                color: Colors.grey.shade700,
+                                fontFamily: Constants.OPEN_SANS),
                           ),
                           subtitle: Text(
                             "Don't be too quick to give out personal information.".tr().toString(),
                             style: TextStyle(
-                              fontSize: 17,
+                                fontSize: 15,
+                                color: Colors.grey.shade500,
+                                fontFamily: Constants.OPEN_SANS,
+                                fontWeight: FontWeight.w600
                             ),
                           ),
                         ),
                         ListTile(
-                          contentPadding: EdgeInsets.all(8),
+                          contentPadding: EdgeInsets.only(left: 20, top: 8, right: 10, bottom: 8),
+                          leading: SizedBox(
+                              height: 25,
+                              width: 25, // fixed width and height
+                              child: Image.asset('assets/images/check_mark.png')
+                          ),
                           title: Text(
                             "Be proactive.".tr().toString(),
                             style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                                fontSize: 17, fontWeight: FontWeight.w700,
+                                color: Colors.grey.shade700,
+                                fontFamily: Constants.OPEN_SANS),
                           ),
                           subtitle: Text(
                             "Always report bad behavior.".tr().toString(),
                             style: TextStyle(
-                              fontSize: 17,
+                                fontSize: 15,
+                                color: Colors.grey.shade500,
+                                fontFamily: Constants.OPEN_SANS,
+                                fontWeight: FontWeight.w600
                             ),
                           ),
                         ),
@@ -131,7 +187,7 @@ class _WelcomeState extends State<Welcome> {
                         width: MediaQuery.of(context).size.width * .75,
                         child: Center(
                             child: Text(
-                          "GOT IT".tr().toString(),
+                          "I Agree".tr().toString(),
                           style: TextStyle(
                               fontSize: 15,
                               color: textColor,

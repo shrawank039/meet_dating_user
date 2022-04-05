@@ -214,7 +214,7 @@ Future showWelcomDialog(context) async {
                 child: Column(
                   children: <Widget>[
                     Image.asset(
-                      "asset/auth/verified.jpg",
+                      "assets/auth/verified.jpg",
                       height: 60,
                       color: primaryColor,
                       colorBlendMode: BlendMode.color,

@@ -518,7 +518,7 @@ class _ChatPageState extends State<ChatPage> {
               decoration: BoxDecoration(
                   // image: DecorationImage(
                   //     fit: BoxFit.fitWidth,
-                  //     image: AssetImage("asset/chat.jpg")),
+                  //     image: AssetImage("assets/chat.jpg")),
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(50),
                       topRight: Radius.circular(50)),

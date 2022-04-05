@@ -77,7 +77,7 @@ class _OTPState extends State<OTP> {
                     child: Column(
                       children: <Widget>[
                         Image.asset(
-                          "asset/auth/verified.jpg",
+                          "assets/auth/verified.jpg",
                           height: 100,
                         ),
                         Text(
@@ -130,7 +130,7 @@ class _OTPState extends State<OTP> {
                       child: Column(
                         children: <Widget>[
                           Image.asset(
-                            "asset/auth/verified.jpg",
+                            "assets/auth/verified.jpg",
                             height: 60,
                             color: primaryColor,
                             colorBlendMode: BlendMode.color,
@@ -190,7 +190,7 @@ class _OTPState extends State<OTP> {
                   child: Column(
                     children: <Widget>[
                       Image.asset(
-                        "asset/auth/verified.jpg",
+                        "assets/auth/verified.jpg",
                         height: 60,
                         color: primaryColor,
                         colorBlendMode: BlendMode.color,
@@ -234,7 +234,7 @@ class _OTPState extends State<OTP> {
             children: <Widget>[
               Container(
                 child: Image.asset(
-                  "asset/auth/MobileNumber.png",
+                  "assets/auth/MobileNumber.png",
                   fit: BoxFit.cover,
                   height: 300,
                   width: MediaQuery.of(context).size.width,

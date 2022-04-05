@@ -11,6 +11,7 @@ import 'package:meetapp/Screens/auth/login.dart';
 import 'package:meetapp/util/color.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'Screens/landing_page.dart';
 import 'ads/mobile_ads.dart';
 
 Future<void> main() async {
@@ -25,7 +26,7 @@ Future<void> main() async {
     //runApp(new MyApp());
     runApp(EasyLocalization(
       supportedLocales: [Locale('en', 'US'), Locale('es', 'ES')],
-      path: 'asset/translation',
+      path: 'assets/translation',
       saveLocale: true,
       fallbackLocale: Locale('en', 'US'),
       child: new MyApp(),
@@ -123,8 +124,8 @@ class _MyAppState extends State<MyApp> {
           : isRegistered
               ? Tabbar(null, null)
               : isAuth
-                  ? Welcome()
-                  : Login(),
+                  ? Welcome()//Welcome()
+                  : Login(), //Login()
     );
   }
 }

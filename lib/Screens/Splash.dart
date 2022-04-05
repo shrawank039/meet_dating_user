@@ -17,7 +17,7 @@ class _SplashState extends State<Splash> {
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               child: Image.asset(
-                "asset/banner.png",
+                "assets/banner.png",
                 fit: BoxFit.contain,
               )),
         ));

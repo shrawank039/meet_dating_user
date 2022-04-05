@@ -717,7 +717,7 @@ class _SettingsState extends State<Settings> {
                           height: 50,
                           width: 100,
                           child: Image.asset(
-                            "asset/logo-light.png",
+                            "assets/logo-light.png",
                             fit: BoxFit.contain,
                           )),
                     )),
@@ -819,7 +819,7 @@ class _SettingsState extends State<Settings> {
                                       child: Column(
                                         children: <Widget>[
                                           Image.asset(
-                                            "asset/auth/verified.jpg",
+                                            "assets/auth/verified.jpg",
                                             height: 60,
                                             color: primaryColor,
                                             colorBlendMode: BlendMode.color,

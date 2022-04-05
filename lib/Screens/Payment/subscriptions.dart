@@ -14,7 +14,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../Profile/profile.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:easy_localization/easy_localization.dart';
-
 import '../Tab.dart';
 
 class Subscription extends StatefulWidget {

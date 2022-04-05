@@ -53,7 +53,7 @@ class _VerificationState extends State<Verification> {
                     child: Column(
                       children: <Widget>[
                         Image.asset(
-                          "asset/auth/verified.jpg",
+                          "assets/auth/verified.jpg",
                           height: 100,
                         ),
                         Text(
@@ -94,7 +94,7 @@ class _VerificationState extends State<Verification> {
                 margin: EdgeInsets.only(top: 100),
                 width: 300,
                 child: Image.asset(
-                  "asset/auth/verifyOtp.png",
+                  "assets/auth/verifyOtp.png",
                 ),
               ),
             ),
@@ -236,7 +236,7 @@ class _VerificationState extends State<Verification> {
                                     child: Column(
                                       children: <Widget>[
                                         Image.asset(
-                                          "asset/auth/verified.jpg",
+                                          "assets/auth/verified.jpg",
                                           height: 100,
                                         ),
                                         Text(
