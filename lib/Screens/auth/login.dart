@@ -1,4 +1,5 @@
 import 'dart:io';
+
 //import 'package:apple_sign_in/apple_sign_in.dart' as i;
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/services.dart';
 import 'package:meetapp/Screens/Tab.dart';
 import 'package:meetapp/Screens/Welcome.dart';
 import 'package:meetapp/Screens/auth/otp.dart';
+import 'package:meetapp/constants/constants.dart';
 import 'package:meetapp/models/custom_web_view.dart';
 import 'package:meetapp/util/color.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -76,10 +78,10 @@ class Login extends StatelessWidget {
                           SizedBox(
                             height: 15,
                           ),
-                          Image.asset(
-                            "assets/logo-dark.png",
-                            fit: BoxFit.contain,
-                          ),
+                          SizedBox(
+                              height: 100,
+                              width: 100, // fixed width and height
+                              child: Image.asset('assets/logo-white.png')),
                         ],
                       ),
                       width: double.infinity,
@@ -93,69 +95,83 @@ class Login extends StatelessWidget {
               ),
               Column(children: <Widget>[
                 SizedBox(
-                  //height: MediaQuery.of(context).size.height * .1,
-                  height: MediaQuery.of(context).size.height * .02,
+                  height: MediaQuery.of(context).size.height * .1,
                 ),
                 Container(
+                  margin: EdgeInsets.only(left: 30, right: 30, bottom: 5),
                   child: Text(
-                    "By tapping 'Log in', you agree with our \n Terms.Learn how we process your data in \n our Privacy Policy and Cookies Policy."
+                    "By tapping 'Log in', you agree with our Terms.Learn how we process your data in our Privacy Policy and Cookies Policy."
                         .tr()
                         .toString(),
                     textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.black54, fontSize: 15),
+                    style: TextStyle(
+                        color: Colors.grey.shade500,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10, bottom: 10),
                   child: Material(
-                    elevation: 2.0,
-                    borderRadius: BorderRadius.all(Radius.circular(30)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: InkWell(
-                        child: Container(
-                            decoration: BoxDecoration(
-                                shape: BoxShape.rectangle,
-                                borderRadius: BorderRadius.circular(25),
-                                gradient: LinearGradient(
-                                    begin: Alignment.topRight,
-                                    end: Alignment.bottomLeft,
-                                    colors: [
-                                      primaryColor.withOpacity(.5),
-                                      primaryColor.withOpacity(.8),
-                                      primaryColor,
-                                      primaryColor
-                                    ])),
-                            height: MediaQuery.of(context).size.height * .065,
-                            width: MediaQuery.of(context).size.width * .8,
-                            child: Center(
+                    elevation: 1,
+                    borderRadius: BorderRadius.all(Radius.circular(25)),
+                    child: InkWell(
+                      child: Container(
+                        padding: EdgeInsets.only(left: 30, right: 30),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.rectangle,
+                            borderRadius: BorderRadius.circular(25),
+                            gradient: LinearGradient(
+                                begin: Alignment.topRight,
+                                end: Alignment.bottomLeft,
+                                colors: [
+                                  primaryColor.withOpacity(.5),
+                                  primaryColor.withOpacity(.8),
+                                  primaryColor,
+                                  primaryColor
+                                ])),
+                        height: MediaQuery.of(context).size.height * .065,
+                        width: MediaQuery.of(context).size.width * .8,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(child: Center(
                                 child: Text(
-                              "LOG IN WITH FACEBOOK".tr().toString(),
-                              style: TextStyle(
-                                  color: textColor,
-                                  fontWeight: FontWeight.bold),
-                            ))),
-                        onTap: () async {
-                          showDialog(
-                              context: context,
-                              builder: (context) => Container(
-                                  height: 30,
-                                  width: 30,
-                                  child: Center(
-                                      child: CupertinoActivityIndicator(
-                                    key: UniqueKey(),
-                                    radius: 20,
-                                    animating: true,
-                                  ))));
-                          await handleFacebookLogin(context).then((user) {
-                            navigationCheck(user, context);
-                          }).then((_) {
-                            Navigator.pop(context);
-                          }).catchError((e) {
-                            Navigator.pop(context);
-                          });
-                        },
+                                  "LOG IN WITH FACEBOOK".tr().toString(),
+                                  style: TextStyle(
+                                    color: textColor,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 14,
+                                  ),
+                                ))),
+                            SizedBox(
+                                height: 20,
+                                width: 20, // fixed width and height
+                                child:
+                                    Image.asset('assets/images/facebook.png')),
+                          ],
+                        ),
                       ),
+                      onTap: () async {
+                        showDialog(
+                            context: context,
+                            builder: (context) => Container(
+                                height: 30,
+                                width: 30,
+                                child: Center(
+                                    child: CupertinoActivityIndicator(
+                                  key: UniqueKey(),
+                                  radius: 20,
+                                  animating: true,
+                                ))));
+                        await handleFacebookLogin(context).then((user) {
+                          navigationCheck(user, context);
+                        }).then((_) {
+                          Navigator.pop(context);
+                        }).catchError((e) {
+                          Navigator.pop(context);
+                        });
+                      },
                     ),
                   ),
                 ),
@@ -184,43 +200,96 @@ class Login extends StatelessWidget {
                 //         ),
                 //       )
                 Container(),
-                OutlineButton(
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * .065,
-                    width: MediaQuery.of(context).size.width * .75,
-                    child: Center(
-                        child: Text("LOG IN WITH PHONE NUMBER".tr().toString(),
-                            style: TextStyle(
-                                color: primaryColor,
-                                fontWeight: FontWeight.bold))),
+                // OutlineButton(
+                //   child: Container(
+                //     height: MediaQuery.of(context).size.height * .065,
+                //     width: MediaQuery.of(context).size.width * .75,
+                //     child: Center(
+                //         child: Text("LOG IN WITH PHONE NUMBER".tr().toString(),
+                //             style: TextStyle(
+                //                 color: primaryColor,
+                //                 fontWeight: FontWeight.bold))),
+                //   ),
+                //   borderSide: BorderSide(
+                //       width: 1, style: BorderStyle.solid, color: primaryColor),
+                //   shape: RoundedRectangleBorder(
+                //       borderRadius: BorderRadius.circular(25)),
+                //   onPressed: () {
+                //     bool updateNumber = false;
+                //     Navigator.push(
+                //         context,
+                //         CupertinoPageRoute(
+                //             builder: (context) => OTP(updateNumber)));
+                //   },
+                // ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10, bottom: 10),
+                  child: Material(
+                    elevation: 1,
+                    borderRadius: BorderRadius.all(Radius.circular(25)),
+                    child: InkWell(
+                      child: Container(
+                        padding: EdgeInsets.only(left: 30, right: 30),
+                          decoration: BoxDecoration(
+                              shape: BoxShape.rectangle,
+                              borderRadius: BorderRadius.circular(25),
+                              gradient: LinearGradient(
+                                  begin: Alignment.topRight,
+                                  end: Alignment.bottomLeft,
+                                  colors: [
+                                    primaryColor.withOpacity(.5),
+                                    primaryColor.withOpacity(.8),
+                                    primaryColor,
+                                    primaryColor
+                                  ])),
+                          height: MediaQuery.of(context).size.height * .065,
+                          width: MediaQuery.of(context).size.width * .8,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(child: Center(child: Text(
+                                "LOG IN WITH PHONE NUMBER".tr().toString(),
+                                style: TextStyle(
+                                  color: textColor,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14,
+                                ),
+                              ))),
+                              SizedBox(
+                                  height: 20,
+                                  width: 20, // fixed width and height
+                                  child:
+                                  Image.asset('assets/images/phone.png')),
+                            ],
+                          ),),
+                      onTap: () async {
+                        bool updateNumber = false;
+                        Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                                builder: (context) => OTP(updateNumber)));
+                      },
+                    ),
                   ),
-                  borderSide: BorderSide(
-                      width: 1, style: BorderStyle.solid, color: primaryColor),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25)),
-                  onPressed: () {
-                    bool updateNumber = false;
-                    Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                            builder: (context) => OTP(updateNumber)));
-                  },
                 ),
               ]),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      "Trouble logging in?".tr().toString(),
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 12,
-                          fontWeight: FontWeight.normal),
-                    ),
-                  ],
-                ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(vertical: 10),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.center,
+              //     children: <Widget>[
+              //       Text(
+              //         "Trouble logging in?".tr().toString(),
+              //         style: TextStyle(
+              //             color: Colors.black,
+              //             fontSize: 12,
+              //             fontWeight: FontWeight.normal),
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              SizedBox(
+                height: 20,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -228,10 +297,13 @@ class Login extends StatelessWidget {
                   GestureDetector(
                     child: Text(
                       "Privacy Policy".tr().toString(),
-                      style: TextStyle(color: Colors.blue),
+                      style: TextStyle(
+                          color: Colors.blue,
+                          decoration: TextDecoration.underline,
+                          fontSize: 13),
                     ),
                     onTap: () => _launchURL(
-                        "https://www.m.com/apps/meetapp/Privacy-Policy.html"), //TODO: add privacy policy
+                        "https://www.privacypolicygenerator.info/live.php?token=lAg44lrhZYKsx5cRfBnJ169DJUPh94Uo"), //TODO: add privacy policy
                   ),
                   Container(
                     margin: EdgeInsets.only(left: 10, right: 10),
@@ -244,10 +316,13 @@ class Login extends StatelessWidget {
                   GestureDetector(
                     child: Text(
                       "Terms & Conditions".tr().toString(),
-                      style: TextStyle(color: Colors.blue),
+                      style: TextStyle(
+                          color: Colors.blue,
+                          decoration: TextDecoration.underline,
+                          fontSize: 13),
                     ),
                     onTap: () => _launchURL(
-                        "https://www.m.com/apps/meetapp/Terms-Service.html"), //TODO: add Terms and conditions
+                        "https://www.privacypolicygenerator.info/live.php?token=lAg44lrhZYKsx5cRfBnJ169DJUPh94Uo"), //TODO: add Terms and conditions
                   ),
                 ],
               ),

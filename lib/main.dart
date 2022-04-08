@@ -8,6 +8,7 @@ import 'package:meetapp/Screens/Splash.dart';
 import 'package:meetapp/Screens/Tab.dart';
 import 'package:meetapp/Screens/Welcome.dart';
 import 'package:meetapp/Screens/auth/login.dart';
+import 'package:meetapp/constants/constants.dart';
 import 'package:meetapp/util/color.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -117,6 +118,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        fontFamily: Constants.POPPINS,
         primaryColor: primaryColor,
       ),
       home: isLoading
