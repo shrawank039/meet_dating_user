@@ -13,7 +13,6 @@ import 'package:meetapp/util/color.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'Screens/landing_page.dart';
-import 'ads/mobile_ads.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

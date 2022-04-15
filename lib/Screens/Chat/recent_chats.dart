@@ -7,13 +7,16 @@ import 'package:meetapp/Screens/Chat/chatPage.dart';
 import 'package:meetapp/models/user_model.dart';
 import 'package:meetapp/util/color.dart';
 import 'package:intl/intl.dart';
+import 'dart:developer';
+import '../Payment/subscriptions.dart';
 
 class RecentChats extends StatelessWidget {
   final db = FirebaseFirestore.instance;
   final User currentUser;
+  final bool isPuchased;
   final List<User> matches;
 
-  RecentChats(this.currentUser, this.matches);
+  RecentChats(this.currentUser, this.matches, this.isPuchased);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +38,32 @@ class RecentChats extends StatelessWidget {
                   physics: ScrollPhysics(),
                   children: matches
                       .map((index) => GestureDetector(
-                            onTap: () => Navigator.push(
+                            onTap: () => currentUser.editInfo!['userGender']=="man" && !isPuchased
+                                ? showDialog<void>(
+                              context: context,
+                              barrierDismissible: true,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text('Subscription Alert'),
+                                  content: Text('You do not have any active subscription. Please get any premium subscription to connect, chat, call.'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: const Text('View Plans'),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                        Navigator.push(
+                                          context,
+                                          CupertinoPageRoute(
+                                              builder: (context) => Subscription(
+                                                  currentUser, null, new Map())),
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            )
+                                : Navigator.push(
                               context,
                               CupertinoPageRoute(
                                 builder: (_) => ChatPage(
@@ -122,9 +150,8 @@ class RecentChats extends StatelessWidget {
                                             : snapshot.data!.docs[0]
                                                 ['text'],
                                         style: TextStyle(
-                                          color: Colors.blueGrey,
-                                          fontSize: 15.0,
-                                          fontWeight: FontWeight.w600,
+                                          color: Colors.black,
+                                          fontSize: 13.0,
                                         ),
                                         overflow: TextOverflow.ellipsis,
                                       ),
@@ -147,8 +174,7 @@ class RecentChats extends StatelessWidget {
                                                 : "",
                                             style: TextStyle(
                                               color: Colors.grey,
-                                              fontSize: 15.0,
-                                              fontWeight: FontWeight.bold,
+                                              fontSize: 13.0,
                                             ),
                                           ),
                                           snapshot.data!.docs[0]
@@ -157,8 +183,8 @@ class RecentChats extends StatelessWidget {
                                                   !snapshot.data!.docs[0]
                                                       ['isRead']
                                               ? Container(
-                                                  width: 40.0,
-                                                  height: 20.0,
+                                                  width: 35,
+                                                  height: 17,
                                                   decoration: BoxDecoration(
                                                     color: primaryColor,
                                                     borderRadius:
@@ -170,9 +196,7 @@ class RecentChats extends StatelessWidget {
                                                     'NEW',
                                                     style: TextStyle(
                                                       color: Colors.white,
-                                                      fontSize: 12.0,
-                                                      fontWeight:
-                                                          FontWeight.bold,
+                                                      fontSize: 10,
                                                     ),
                                                   ),
                                                 )
@@ -203,3 +227,4 @@ class RecentChats extends StatelessWidget {
             )));
   }
 }
+

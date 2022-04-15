@@ -100,10 +100,12 @@ class Info extends StatelessWidget {
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },
-                                child: Icon(
+                                child: Image.asset('assets/images/down-arrow.png'),
+                                /*Icon(
                                   Icons.arrow_downward,
                                   color: primaryColor,
-                                )),
+                                )*/
+                            ),
                           ),
                           user.editInfo!['job_title'] != null
                               ? ListTile(
@@ -225,11 +227,12 @@ class Info extends StatelessWidget {
                           FloatingActionButton(
                               heroTag: UniqueKey(),
                               backgroundColor: Colors.white,
-                              child: Icon(
+                              child: Image.asset('assets/images/dislike.png'),
+                              /*Icon(
                                 Icons.clear,
                                 color: Colors.red,
                                 size: 30,
-                              ),
+                              ),*/
                               onPressed: () {
                                 Navigator.pop(context);
                                 swipeKey!.currentState!.swipeLeft();
@@ -237,11 +240,12 @@ class Info extends StatelessWidget {
                           FloatingActionButton(
                               heroTag: UniqueKey(),
                               backgroundColor: Colors.white,
-                              child: Icon(
+                              child: Image.asset('assets/images/like.png'),
+                             /* Icon(
                                 Icons.favorite,
                                 color: Colors.lightBlueAccent,
                                 size: 30,
-                              ),
+                              ),*/
                               onPressed: () {
                                 Navigator.pop(context);
                                 swipeKey!.currentState!.swipeRight();

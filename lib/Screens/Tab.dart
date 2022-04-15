@@ -46,6 +46,8 @@ class TabbarState extends State<Tabbar> {
   List<PurchaseDetails> purchases = [];
   InAppPurchaseConnection _iap = InAppPurchaseConnection.instance;
   bool isPuchased = false;
+  String gender = "";
+
   @override
   void initState() {
     super.initState();
@@ -497,11 +499,11 @@ class TabbarState extends State<Tabbar> {
                                     purchases, items)),
                             Center(
                                 child: CardPictures(
-                                    currentUser!, users, swipecount, items)),
+                                    currentUser!, users, isPuchased, swipecount, items)),
                             Center(child: Notifications(currentUser!)),
                             Center(
                                 child: HomeScreen(
-                                    currentUser!, matches, newmatches)),
+                                    currentUser!, matches, newmatches, isPuchased)),
                           ],
                           physics: NeverScrollableScrollPhysics(),
                         )),

@@ -485,18 +485,20 @@ class _SubscriptionState extends State<Subscription> {
                   GestureDetector(
                     child: Text(
                       "Privacy Policy".tr().toString(),
-                      style: TextStyle(color: Colors.blue),
+                      style: TextStyle(color: Colors.blue,
+                        decoration: TextDecoration.underline),
                     ),
                     onTap: () => launch(
-                        "https://www.m.com/apps/meetapp/Privacy-Policy.html"), //TODO: add privacy policy
+                        "https://www.privacypolicygenerator.info/live.php?token=lAg44lrhZYKsx5cRfBnJ169DJUPh94Uo"), //TODO: add privacy policy
                   ),
                   GestureDetector(
                     child: Text(
                       "Terms & Conditions".tr().toString(),
-                      style: TextStyle(color: Colors.blue),
+                      style: TextStyle(color: Colors.blue,
+                        decoration: TextDecoration.underline),
                     ),
                     onTap: () => launch(
-                        "https://www.m.com/apps/meetapp/Terms-Service.html"), //TODO: add Terms and conditions
+                        "https://www.privacypolicygenerator.info/live.php?token=lAg44lrhZYKsx5cRfBnJ169DJUPh94Uo"), //TODO: add Terms and conditions
                   ),
                 ],
               ),

@@ -8,8 +8,10 @@ import 'package:easy_localization/easy_localization.dart';
 class HomeScreen extends StatefulWidget {
   final User currentUser;
   final List<User> matches;
+  final bool isPuchased;
   final List<User> newmatches;
-  HomeScreen(this.currentUser, this.matches, this.newmatches);
+
+  HomeScreen(this.currentUser, this.matches, this.newmatches, this.isPuchased);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -81,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-                RecentChats(widget.currentUser, widget.matches),
+                RecentChats(widget.currentUser, widget.matches, widget.isPuchased),
               ],
             ),
           ),

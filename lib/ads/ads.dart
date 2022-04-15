@@ -5,6 +5,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 InterstitialAd? _interstitialAd;
 int _numInterstitialLoadAttempts = 0;
 const String testDevice = 'YOUR_DEVICE_ID';
+const bool test = true;
 RewardedAd? _rewardedAd;
 int _numRewardedLoadAttempts = 0;
 const int maxFailedLoadAttempts = 3;
@@ -18,27 +19,29 @@ class Ads {
   );
 
   void createInterstitialAd() {
-    InterstitialAd.load(
-        adUnitId: Platform.isAndroid
-            ? 'ca-app-pub-5334606472230524/8912260113'
-            : 'ca-app-pub-5334606472230524/8912260113',
-        request: request,
-        adLoadCallback: InterstitialAdLoadCallback(
-          onAdLoaded: (InterstitialAd ad) {
-            print('$ad loaded');
-            _interstitialAd = ad;
-            _numInterstitialLoadAttempts = 0;
-            _interstitialAd!.setImmersiveMode(true);
-          },
-          onAdFailedToLoad: (LoadAdError error) {
-            print('InterstitialAd failed to load: $error.');
-            _numInterstitialLoadAttempts += 1;
-            _interstitialAd = null;
-            if (_numInterstitialLoadAttempts < maxFailedLoadAttempts) {
-              createInterstitialAd();
-            }
-          },
-        ));
+    if (!test) {
+      InterstitialAd.load(
+          adUnitId: Platform.isAndroid
+              ? 'ca-app-pub-5334606472230524/8912260113'
+              : 'ca-app-pub-5334606472230524/8912260113',
+          request: request,
+          adLoadCallback: InterstitialAdLoadCallback(
+            onAdLoaded: (InterstitialAd ad) {
+              print('$ad loaded');
+              _interstitialAd = ad;
+              _numInterstitialLoadAttempts = 0;
+              _interstitialAd!.setImmersiveMode(true);
+            },
+            onAdFailedToLoad: (LoadAdError error) {
+              print('InterstitialAd failed to load: $error.');
+              _numInterstitialLoadAttempts += 1;
+              _interstitialAd = null;
+              if (_numInterstitialLoadAttempts < maxFailedLoadAttempts) {
+                createInterstitialAd();
+              }
+            },
+          ));
+    }
   }
 
   void showInterstitialAd() {
@@ -65,26 +68,28 @@ class Ads {
   }
 
   void createRewardedAd() {
-    RewardedAd.load(
-        adUnitId: Platform.isAndroid
-            ? 'ca-app-pub-3940256099942544/5224354917'
-            : 'ca-app-pub-3940256099942544/1712485313',
-        request: request,
-        rewardedAdLoadCallback: RewardedAdLoadCallback(
-          onAdLoaded: (RewardedAd ad) {
-            print('$ad loaded.');
-            _rewardedAd = ad;
-            _numRewardedLoadAttempts = 0;
-          },
-          onAdFailedToLoad: (LoadAdError error) {
-            print('RewardedAd failed to load: $error');
-            _rewardedAd = null;
-            _numRewardedLoadAttempts += 1;
-            if (_numRewardedLoadAttempts < maxFailedLoadAttempts) {
-              createRewardedAd();
-            }
-          },
-        ));
+    if (!test) {
+      RewardedAd.load(
+          adUnitId: Platform.isAndroid
+              ? 'ca-app-pub-3940256099942544/5224354917'
+              : 'ca-app-pub-3940256099942544/1712485313',
+          request: request,
+          rewardedAdLoadCallback: RewardedAdLoadCallback(
+            onAdLoaded: (RewardedAd ad) {
+              print('$ad loaded.');
+              _rewardedAd = ad;
+              _numRewardedLoadAttempts = 0;
+            },
+            onAdFailedToLoad: (LoadAdError error) {
+              print('RewardedAd failed to load: $error');
+              _rewardedAd = null;
+              _numRewardedLoadAttempts += 1;
+              if (_numRewardedLoadAttempts < maxFailedLoadAttempts) {
+                createRewardedAd();
+              }
+            },
+          ));
+    }
   }
 
   void showRewardedAd() {

@@ -100,7 +100,7 @@ class Login extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(left: 30, right: 30, bottom: 5),
                   child: Text(
-                    "By tapping 'Log in', you agree with our Terms.Learn how we process your data in our Privacy Policy and Cookies Policy."
+                    "By tapping 'Log in', you agree with our Terms. Learn how we process your data in our Privacy Policy and Cookies Policy."
                         .tr()
                         .toString(),
                     textAlign: TextAlign.center,

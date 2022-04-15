@@ -160,28 +160,38 @@ class _ChatPageState extends State<ChatPage> {
                           horizontal: 15.0, vertical: 10.0),
                       width: MediaQuery.of(context).size.width * 0.65,
                       margin: EdgeInsets.only(
-                          top: 8.0, bottom: 8.0, left: 80.0, right: 10),
+                          top: 0, bottom: 0, left: 80, right: 10),
                       decoration: BoxDecoration(
                           color: primaryColor.withOpacity(.1),
                           borderRadius: BorderRadius.circular(20)),
                       child: Column(
                         children: <Widget>[
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Expanded(
-                                child: Container(
-                                  child: Text(
-                                    documentSnapshot.data()!['text'],
-                                    style: TextStyle(
-                                      color: Colors.black87,
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ),
+                          Container(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              documentSnapshot.data()!['text'],
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 15,
                               ),
+                            ),
+                          ),
+
+                          // Row(
+                          //   crossAxisAlignment: CrossAxisAlignment.end,
+                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //   children: <Widget>[
+                          //     Expanded(
+                          //       child: Container(
+                          //         child: Text(
+                          //           documentSnapshot.data()!['text'],
+                          //           style: TextStyle(
+                          //             color: Colors.black,
+                          //             fontSize: 15,
+                          //           ),
+                          //         ),
+                          //       ),
+                          //     ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: <Widget>[
@@ -196,8 +206,7 @@ class _ChatPageState extends State<ChatPage> {
                                         : "",
                                     style: TextStyle(
                                       color: secondryColor,
-                                      fontSize: 13.0,
-                                      fontWeight: FontWeight.w600,
+                                      fontSize: 11, // time text
                                     ),
                                   ),
                                   SizedBox(
@@ -217,8 +226,8 @@ class _ChatPageState extends State<ChatPage> {
                                 ],
                               ),
                             ],
-                          ),
-                        ],
+                        //  ),
+                       // ],
                       )),
             ),
           ],
@@ -229,36 +238,41 @@ class _ChatPageState extends State<ChatPage> {
 
   _messagesIsRead(documentSnapshot) {
     return <Widget>[
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          InkWell(
-            child: CircleAvatar(
-              backgroundColor: secondryColor,
-              radius: 25.0,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(90),
-                child: CachedNetworkImage(
-                  imageUrl: widget.second.imageUrl![0] ?? '',
-                  useOldImageOnUrlChange: true,
-                  placeholder: (context, url) => CupertinoActivityIndicator(
-                    radius: 15,
+      Container(
+        margin: EdgeInsets.only(left: 5),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            InkWell(
+              child: CircleAvatar(
+                backgroundColor: secondryColor,
+                radius: 23,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(90),
+                  child: CachedNetworkImage(
+                    imageUrl: widget.second.imageUrl![0] ?? '',
+                    useOldImageOnUrlChange: true,
+                    placeholder: (context, url) => CupertinoActivityIndicator(
+                      radius: 15,
+                    ),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
                   ),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
               ),
+              onTap: () => showDialog(
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (context) {
+                    return Info(widget.second, widget.sender, null);
+                  }),
             ),
-            onTap: () => showDialog(
-                barrierDismissible: false,
-                context: context,
-                builder: (context) {
-                  return Info(widget.second, widget.sender, null);
-                }),
-          ),
-        ],
-      ),
+          ],
+        ),
+      )
+      ,
       Expanded(
-        child: Column(
+        child:
+        Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
@@ -320,28 +334,37 @@ class _ChatPageState extends State<ChatPage> {
                       padding: EdgeInsets.symmetric(
                           horizontal: 15.0, vertical: 10.0),
                       width: MediaQuery.of(context).size.width * 0.65,
-                      margin: EdgeInsets.only(top: 8.0, bottom: 8.0, right: 10),
+                      margin: EdgeInsets.only(top: 0, bottom: 0, right: 10, left: 10),
                       decoration: BoxDecoration(
-                          color: secondryColor.withOpacity(.3),
+                          color: secondryColor.withOpacity(.2),
                           borderRadius: BorderRadius.circular(20)),
                       child: Column(
                         children: <Widget>[
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Expanded(
-                                child: Container(
-                                  child: Text(
-                                    documentSnapshot.data()!['text'],
-                                    style: TextStyle(
-                                      color: Colors.black87,
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ),
+                          Container(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              documentSnapshot.data()!['text'],
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 15,
                               ),
+                            ),
+                          ),
+                          // Row(
+                          //   crossAxisAlignment: CrossAxisAlignment.end,
+                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //   children: <Widget>[
+                          //     Expanded(
+                          //       child: Container(
+                          //         child: Text(
+                          //           documentSnapshot.data()!['text'],
+                          //           style: TextStyle(
+                          //             color: Colors.black,
+                          //             fontSize: 16.0,
+                          //           ),
+                          //         ),
+                          //       ),
+                          //     ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: <Widget>[
@@ -356,14 +379,13 @@ class _ChatPageState extends State<ChatPage> {
                                         : "",
                                     style: TextStyle(
                                       color: secondryColor,
-                                      fontSize: 13.0,
-                                      fontWeight: FontWeight.w600,
+                                      fontSize: 11,
                                     ),
                                   ),
                                 ],
                               ),
-                            ],
-                          ),
+                          //   ],
+                          // ),
                         ],
                       )),
             ),
@@ -417,7 +439,7 @@ class _ChatPageState extends State<ChatPage> {
       backgroundColor: Colors.white,
       appBar: AppBar(
           backgroundColor: primaryColor,
-          centerTitle: true,
+          centerTitle: false,
           elevation: 0,
           title: Text(widget.second.name!),
           leading: IconButton(

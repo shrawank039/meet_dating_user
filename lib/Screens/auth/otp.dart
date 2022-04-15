@@ -245,17 +245,20 @@ class _OTPState extends State<OTP> {
               //   size: 50,
               // ),
               ListTile(
+                contentPadding: EdgeInsets.only(left: 20, right: 20),
                 title: Text(
                   "Verify Your Number".tr().toString(),
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 27, fontWeight: FontWeight.bold),
                 ),
                 subtitle: Text(
-                  "Please enter Your mobile Number to\n receive a verification code. Message and da ta\n rates may apply"
+                  "Please enter Your mobile Number to receive a verification code. Message and data rates may apply"
                       .tr()
                       .toString(),
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
+                  style: TextStyle(color: Colors.grey.shade500,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600),
                 ),
               ),
               Padding(
@@ -301,7 +304,7 @@ class _OTPState extends State<OTP> {
                           },
                           decoration: InputDecoration(
                             hintText: "Enter your number".tr().toString(),
-                            hintStyle: TextStyle(fontSize: 18),
+                            hintStyle: TextStyle(fontSize: 16),
                             focusColor: primaryColor,
                             focusedBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: primaryColor)),

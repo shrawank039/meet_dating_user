@@ -8,7 +8,6 @@ import 'package:meetapp/Screens/Information.dart';
 import 'package:meetapp/Screens/Payment/subscriptions.dart';
 import 'package:meetapp/Screens/Tab.dart';
 import 'package:meetapp/ads/ads.dart';
-import 'package:meetapp/ads/mobile_ads.dart';
 import 'package:meetapp/models/user_model.dart';
 import 'package:meetapp/util/color.dart';
 import 'package:meetapp/swipe_stack/swipe_stack.dart';
@@ -21,8 +20,10 @@ class CardPictures extends StatefulWidget {
   final List<User> users;
   final User currentUser;
   final int swipedcount;
+  final bool isPuchased;
   final Map items;
-  CardPictures(this.currentUser, this.users, this.swipedcount, this.items);
+
+  CardPictures(this.currentUser, this.users, this.isPuchased, this.swipedcount, this.items);
 
   @override
   _CardPicturesState createState() => _CardPicturesState();
@@ -78,7 +79,7 @@ class _CardPicturesState extends State<CardPictures>
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       Padding(
-                                        padding: const EdgeInsets.all(8.0),
+                                        padding: const EdgeInsets.all(8),
                                         child: CircleAvatar(
                                           backgroundColor: secondryColor,
                                           radius: 40,
@@ -459,42 +460,60 @@ class _CardPicturesState extends State<CardPictures>
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: <Widget>[
-                            widget.users.length != 0
-                                ? FloatingActionButton(
-                                    heroTag: UniqueKey(),
-                                    backgroundColor: Colors.white,
-                                    child: Icon(
-                                      userRemoved.length > 0
-                                          ? Icons.replay
-                                          : Icons.not_interested,
-                                      color: userRemoved.length > 0
-                                          ? Colors.amber
-                                          : secondryColor,
-                                      size: 20,
-                                    ),
-                                    onPressed: () {
-                                      if (userRemoved.length > 0) {
-                                        swipeKey.currentState!.rewind();
-                                      }
-                                    })
-                                : FloatingActionButton(
-                                    heroTag: UniqueKey(),
-                                    backgroundColor: Colors.white,
-                                    child: Icon(
-                                      Icons.refresh,
-                                      color: Colors.green,
-                                      size: 20,
-                                    ),
-                                    onPressed: () {},
-                                  ),
+                            if(widget.users.length != 0 &&
+                                userRemoved.length > 0 )
+                             FloatingActionButton(
+                              heroTag: UniqueKey(),
+                              backgroundColor: Colors.white,
+                              child: Image.asset('assets/images/previous.png'),
+                              // Icon(
+                              //   Icons.refresh,
+                              //   color: Colors.white,
+                              //   size: 20,
+                              // ),
+                              onPressed: () {
+                                if (userRemoved.length > 0) {
+                                  swipeKey.currentState!.rewind();
+                                }
+                              },
+                            ),
+                            // FloatingActionButton(
+                            //         heroTag: UniqueKey(),
+                            //         backgroundColor: Colors.white,
+                            //         child: Icon(
+                            //           userRemoved.length > 0
+                            //               ? Icons.replay
+                            //               : Icons.not_interested,
+                            //           color: userRemoved.length > 0
+                            //               ? Colors.amber
+                            //               : secondryColor,
+                            //           size: 20,
+                            //         ),
+                            //         onPressed: () {
+                            //           if (userRemoved.length > 0) {
+                            //             swipeKey.currentState!.rewind();
+                            //           }
+                            //         })
+                            //     : FloatingActionButton(
+                            //         heroTag: UniqueKey(),
+                            //         backgroundColor: primaryColor,
+                            //         child: Image.asset('assets/images/previous.png'),
+                            //         // Icon(
+                            //         //   Icons.refresh,
+                            //         //   color: Colors.white,
+                            //         //   size: 20,
+                            //         // ),
+                            //         onPressed: () {},
+                            //       ),
                             FloatingActionButton(
                                 heroTag: UniqueKey(),
                                 backgroundColor: Colors.white,
-                                child: Icon(
-                                  Icons.clear,
-                                  color: Colors.red,
-                                  size: 30,
-                                ),
+                                child: Image.asset('assets/images/dislike.png'),
+                                // Icon(
+                                //   Icons.clear,
+                                //   color: Colors.red,
+                                //   size: 30,
+                                // ),
                                 onPressed: () {
                                   if (widget.users.length > 0) {
                                     print("object");
@@ -504,15 +523,32 @@ class _CardPicturesState extends State<CardPictures>
                             FloatingActionButton(
                                 heroTag: UniqueKey(),
                                 backgroundColor: Colors.white,
-                                child: Icon(
-                                  Icons.favorite,
-                                  color: Colors.lightBlueAccent,
-                                  size: 30,
-                                ),
+                                child: Image.asset('assets/images/like.png'),
+                                // Icon(
+                                //   Icons.favorite,
+                                //   color: Colors.lightBlueAccent,
+                                //   size: 30,
+                                // ),
                                 onPressed: () {
                                   if (widget.users.length > 0) {
                                     swipeKey.currentState!.swipeRight();
                                   }
+                                }),
+                            FloatingActionButton(
+                                heroTag: UniqueKey(),
+                                backgroundColor: Colors.white,
+                                child: Image.asset('assets/images/boost.png'),
+                                // Icon(
+                                //   Icons.favorite,
+                                //   color: Colors.lightBlueAccent,
+                                //   size: 30,
+                                // ),
+                                onPressed: () {
+                                  _ads.createRewardedAd();
+                                  _ads.showRewardedAd();
+                                  countswipe =0;
+                                  exceedSwipes = false;
+                                  _adsCheck(countswipe);
                                 }),
                           ],
                         ),
@@ -547,7 +583,7 @@ class _CardPicturesState extends State<CardPictures>
                                       color: primaryColor,
                                     ),
                                     Text(
-                                      "you have already used the maximum number of free available swipes for 24 hrs."
+                                      "You've already used the maximum number of free available swipes for 24 hrs."
                                           .tr()
                                           .toString(),
                                       textAlign: TextAlign.center,
@@ -565,7 +601,7 @@ class _CardPicturesState extends State<CardPictures>
                                       ),
                                     ),
                                     Text(
-                                      "For swipe more users just subscribe our premium plans."
+                                      "For swipe more users, use boost button or just subscribe our premium plans."
                                           .tr()
                                           .toString(),
                                       textAlign: TextAlign.center,
@@ -596,9 +632,6 @@ class _CardPicturesState extends State<CardPictures>
   void _adsCheck(count) {
     print(count);
     if (count % 10 == 0) {
-      // _ads.myInterstitial()
-      //   ..load()
-      //   ..show();
       _ads.createInterstitialAd();
       _ads.showInterstitialAd();
       countswipe++;
