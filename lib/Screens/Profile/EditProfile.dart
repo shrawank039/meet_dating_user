@@ -241,7 +241,6 @@ class EditProfileState extends State<EditProfile> {
         };
         try {
           if (isProfilePicture) {
-            //currentUser.imageUrl.removeAt(0);
             currentUser.imageUrl!.insert(0, fileURL);
             print("object");
             await FirebaseFirestore.instance

@@ -4,8 +4,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:meetapp/Screens/SelectPassion.dart';
 import 'package:meetapp/Screens/Splash.dart';
 import 'package:meetapp/Screens/Tab.dart';
+import 'package:meetapp/Screens/UserPhotos.dart';
 import 'package:meetapp/Screens/Welcome.dart';
 import 'package:meetapp/Screens/auth/login.dart';
 import 'package:meetapp/constants/constants.dart';
@@ -114,6 +116,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -123,7 +126,7 @@ class _MyAppState extends State<MyApp> {
       home: isLoading
           ? Splash()
           : isRegistered
-              ? Tabbar(null, null)
+              ? UserPhotos(new Map())//Tabbar(null, null)
               : isAuth
                   ? Welcome()//Welcome()
                   : Login(), //Login()
