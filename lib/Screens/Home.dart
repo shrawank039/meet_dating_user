@@ -23,7 +23,8 @@ class CardPictures extends StatefulWidget {
   final bool isPuchased;
   final Map items;
 
-  CardPictures(this.currentUser, this.users, this.isPuchased, this.swipedcount, this.items);
+  CardPictures(this.currentUser, this.users, this.isPuchased, this.swipedcount,
+      this.items);
 
   @override
   _CardPicturesState createState() => _CardPicturesState();
@@ -34,11 +35,14 @@ class _CardPicturesState extends State<CardPictures>
   // TabbarState state = TabbarState();
   bool onEnd = false;
   Ads _ads = new Ads();
+
   //MobAds _ads = new MobAds();
 
   GlobalKey<SwipeStackState> swipeKey = GlobalKey<SwipeStackState>();
+
   @override
   bool get wantKeepAlive => true;
+
   Widget build(BuildContext context) {
     super.build(context);
     print(
@@ -49,7 +53,34 @@ class _CardPicturesState extends State<CardPictures>
         : 10;
     bool exceedSwipes = widget.swipedcount >= freeSwipe;
     return Scaffold(
-      backgroundColor: primaryColor,
+      appBar: AppBar(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              height: 30,
+              child: Image.asset('assets/logo.png'),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Text(
+                'Meet',
+                style: TextStyle(
+                  color: primaryColor,
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 1.0,
+                ),
+              ),
+            ),
+          ],
+        ),
+        elevation: 0,
+        backgroundColor: Colors.white,
+        centerTitle: true, // like this!
+      ),
+      backgroundColor: Colors.white,
       body: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
@@ -68,7 +99,7 @@ class _CardPicturesState extends State<CardPictures>
                       decoration: BoxDecoration(
                         color: Colors.white,
                       ),
-                      height: MediaQuery.of(context).size.height * .78,
+                      height: MediaQuery.of(context).size.height * .75,
                       width: MediaQuery.of(context).size.width,
                       child:
                           //onEnd ||
@@ -460,23 +491,24 @@ class _CardPicturesState extends State<CardPictures>
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: <Widget>[
-                            if(widget.users.length != 0 &&
-                                userRemoved.length > 0 )
-                             FloatingActionButton(
-                              heroTag: UniqueKey(),
-                              backgroundColor: Colors.white,
-                              child: Image.asset('assets/images/previous.png'),
-                              // Icon(
-                              //   Icons.refresh,
-                              //   color: Colors.white,
-                              //   size: 20,
-                              // ),
-                              onPressed: () {
-                                if (userRemoved.length > 0) {
-                                  swipeKey.currentState!.rewind();
-                                }
-                              },
-                            ),
+                            if (widget.users.length != 0 &&
+                                userRemoved.length > 0)
+                              FloatingActionButton(
+                                heroTag: UniqueKey(),
+                                backgroundColor: Colors.white,
+                                child:
+                                    Image.asset('assets/images/previous.png'),
+                                // Icon(
+                                //   Icons.refresh,
+                                //   color: Colors.white,
+                                //   size: 20,
+                                // ),
+                                onPressed: () {
+                                  if (userRemoved.length > 0) {
+                                    swipeKey.currentState!.rewind();
+                                  }
+                                },
+                              ),
                             // FloatingActionButton(
                             //         heroTag: UniqueKey(),
                             //         backgroundColor: Colors.white,
@@ -546,7 +578,7 @@ class _CardPicturesState extends State<CardPictures>
                                 onPressed: () {
                                   _ads.createRewardedAd();
                                   _ads.showRewardedAd();
-                                  countswipe =0;
+                                  countswipe = 0;
                                   exceedSwipes = false;
                                   _adsCheck(countswipe);
                                 }),

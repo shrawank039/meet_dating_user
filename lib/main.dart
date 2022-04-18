@@ -126,7 +126,7 @@ class _MyAppState extends State<MyApp> {
       home: isLoading
           ? Splash()
           : isRegistered
-              ? UserPhotos(new Map())//Tabbar(null, null)
+              ? Tabbar(null, null)
               : isAuth
                   ? Welcome()//Welcome()
                   : Login(), //Login()

@@ -24,7 +24,9 @@ List likedByList = [];
 class Tabbar extends StatefulWidget {
   final bool? isPaymentSuccess;
   final String? plan;
+
   Tabbar(this.plan, this.isPaymentSuccess);
+
   @override
   TabbarState createState() => TabbarState();
 }
@@ -55,12 +57,9 @@ class TabbarState extends State<Tabbar> {
         .getInitialMessage()
         .then((RemoteMessage? message) {
       if (message != null) {
-        
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => Incoming(message.data)));
-      } else {
-        
-      }
+      } else {}
     });
     // Show payment success alert.
     if (widget.isPaymentSuccess != null && widget.isPaymentSuccess!) {
@@ -91,6 +90,7 @@ class TabbarState extends State<Tabbar> {
   }
 
   Map items = {};
+
   _getAccessItems() async {
     FirebaseFirestore.instance
         .collection("Item_access")
@@ -106,9 +106,8 @@ class TabbarState extends State<Tabbar> {
   }
 
   Future<void> _getpastPurchases() async {
-    
     QueryPurchaseDetailsResponse response = await _iap.queryPastPurchases();
-    
+
     for (PurchaseDetails purchase in response.pastPurchases) {
       // if (Platform.isIOS) {
       await _iap.completePurchase(purchase);
@@ -141,7 +140,7 @@ class TabbarState extends State<Tabbar> {
       print(purchase.productID);
       if (Platform.isIOS) {
         await _iap.completePurchase(purchase);
-        
+
         isPuchased = true;
       }
       isPuchased = true;
@@ -151,6 +150,7 @@ class TabbarState extends State<Tabbar> {
   }
 
   int swipecount = 0;
+
   _getSwipedcount() {
     FirebaseFirestore.instance
         .collection('/Users/${currentUser!.id}/CheckedUser')
@@ -175,7 +175,6 @@ class TabbarState extends State<Tabbar> {
         .requestPermission(
             alert: true, badge: true, sound: true, provisional: false)
         .then((value) {
-      
       return null;
     });
 
@@ -205,7 +204,6 @@ class TabbarState extends State<Tabbar> {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => Incoming(callInfo)));
       } else if (Platform.isAndroid && message.data['type'] == 'Call') {
-       
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => Incoming(message.data)));
       } else
@@ -223,7 +221,6 @@ class TabbarState extends State<Tabbar> {
         bool iscallling = _checkcallState(message.data['channel_id']);
         print("=================$iscallling");
         if (iscallling) {
-         
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => Incoming(message.data)));
         }
@@ -335,7 +332,6 @@ class TabbarState extends State<Tabbar> {
   }
 
   _getCurrentUser() async {
-    
     User? user = await _firebaseAuth.currentUser;
 
     docRef.doc("${user!.uid}").snapshots().listen((data) async {
@@ -412,13 +408,10 @@ class TabbarState extends State<Tabbar> {
           temp.distanceBW = distance.round();
           if (checkedUser.any(
             (value) {
-              
               return value == temp.id;
             },
           )) {
-            
           } else {
-            
             if (distance <= currentUser!.maxDistance! &&
                 temp.id != currentUser!.id &&
                 !temp.isBlocked!) {
@@ -458,58 +451,106 @@ class TabbarState extends State<Tabbar> {
                             : 1
                         : 1,
                     child: Scaffold(
-                        appBar: AppBar(
-                          elevation: 0,
-                          backgroundColor: primaryColor,
-                          automaticallyImplyLeading: false,
-                          title: TabBar(
-                              labelColor: Colors.white,
-                              indicatorColor: Colors.white,
-                              unselectedLabelColor: Colors.black,
-                              isScrollable: false,
-                              indicatorSize: TabBarIndicatorSize.label,
-                              tabs: [
-                                Tab(
-                                  icon: Icon(
-                                    Icons.person,
-                                    size: 30,
-                                  ),
-                                ),
-                                Tab(
-                                  icon: Icon(
-                                    Icons.whatshot,
-                                  ),
-                                ),
-                                Tab(
-                                  icon: Icon(
-                                    Icons.notifications,
-                                  ),
-                                ),
-                                Tab(
-                                  icon: Icon(
-                                    Icons.message,
-                                  ),
-                                )
-                              ]),
-                        ),
-                        body: TabBarView(
-                          children: [
-                            Center(
-                                child: Profile(currentUser!, isPuchased,
-                                    purchases, items)),
-                            Center(
-                                child: CardPictures(
-                                    currentUser!, users, isPuchased, swipecount, items)),
-                            Center(child: Notifications(currentUser!)),
-                            Center(
-                                child: HomeScreen(
-                                    currentUser!, matches, newmatches, isPuchased)),
-                          ],
-                          physics: NeverScrollableScrollPhysics(),
-                        )),
+                      // appBar: AppBar(
+                      //   elevation: 0,
+                      //   backgroundColor: primaryColor,
+                      //   automaticallyImplyLeading: false,
+                      //   title: TabBar(
+                      //       labelColor: Colors.white,
+                      //       indicatorColor: Colors.white,
+                      //       unselectedLabelColor: Colors.black,
+                      //       isScrollable: false,
+                      //       indicatorSize: TabBarIndicatorSize.label,
+                      //       tabs: [
+                      //         Tab(
+                      //           icon: Icon(
+                      //             Icons.person,
+                      //           ),
+                      //         ),
+                      //         Tab(
+                      //           icon: Icon(
+                      //             Icons.whatshot,
+                      //           ),
+                      //         ),
+                      //         Tab(
+                      //           icon: Icon(
+                      //             Icons.notifications,
+                      //           ),
+                      //         ),
+                      //         Tab(
+                      //           icon: Icon(
+                      //             Icons.message,
+                      //           ),
+                      //         )
+                      //       ]),
+                      // ),
+                      body: Center(child: Builder(builder: (context) {
+                        if (_selectedIndex == 0)
+                          return Center(
+                              child: CardPictures(currentUser!, users,
+                                  isPuchased, swipecount, items));
+                        else if (_selectedIndex == 1)
+                          return Center(
+                              child: HomeScreen(currentUser!, matches,
+                                  newmatches, isPuchased));
+                        else if (_selectedIndex == 2)
+                          return Center(child: Notifications(currentUser!));
+                        else return Center(
+                              child: Profile(currentUser!, isPuchased, purchases, items));
+                      })),
+                      // body: TabBarView(
+                      //   children: [
+                      //     Center(
+                      //         child: Profile(
+                      //             currentUser!, isPuchased, purchases, items)),
+                      //     Center(
+                      //         child: CardPictures(currentUser!, users,
+                      //             isPuchased, swipecount, items)),
+                      //     Center(child: Notifications(currentUser!)),
+                      //     Center(
+                      //         child: HomeScreen(currentUser!, matches,
+                      //             newmatches, isPuchased)),
+                      //   ],
+                      //   physics: NeverScrollableScrollPhysics(),
+                      // ),
+                      bottomNavigationBar: BottomNavigationBar(
+                        showSelectedLabels: false,
+                        showUnselectedLabels: false,
+                        unselectedItemColor: Colors.grey.shade700,
+                        currentIndex: _selectedIndex,
+                        selectedItemColor: primaryColor,
+                        onTap: _onItemTapped,
+                        items: const <BottomNavigationBarItem>[
+                          BottomNavigationBarItem(
+                            icon: Icon(Icons.whatshot),
+                            label: '',
+                          ),
+                          BottomNavigationBarItem(
+                            icon: Icon(Icons.message),
+                            label: '',
+                          ),
+                          BottomNavigationBarItem(
+                            icon: Icon(Icons.notifications),
+                            label: '',
+                          ),
+                          BottomNavigationBarItem(
+                            icon: Icon(Icons.person),
+                            label: '',
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
       ),
     );
+  }
+
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
   Future<bool> _onWillPop() async {
