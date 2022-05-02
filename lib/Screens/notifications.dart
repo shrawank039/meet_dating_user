@@ -45,21 +45,21 @@ class _NotificationsState extends State<Notifications> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // appBar: AppBar(
-          
-        //   automaticallyImplyLeading: false,
-        //   title: Text(
-        //     'Notifications'.tr().toString(),
-        //     style: TextStyle(
-        //       color: Colors.white,
-        //       fontSize: 18.0,
-        //       fontWeight: FontWeight.bold,
-        //       letterSpacing: 1.0,
-        //     ),
-        //   ),
-        //   elevation: 0,
-        // ),
         backgroundColor: primaryColor,
+        appBar: AppBar(
+          backgroundColor: primaryColor,
+          automaticallyImplyLeading: false,
+          title: Text(
+            'Notification'.tr().toString(),
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18.0,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1.0,
+            ),
+          ),
+          elevation: 0.0,
+        ),
         body: Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.only(

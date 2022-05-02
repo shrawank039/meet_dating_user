@@ -514,6 +514,7 @@ class TabbarState extends State<Tabbar> {
                       //   physics: NeverScrollableScrollPhysics(),
                       // ),
                       bottomNavigationBar: BottomNavigationBar(
+                        type: BottomNavigationBarType.fixed,
                         showSelectedLabels: false,
                         showUnselectedLabels: false,
                         unselectedItemColor: Colors.grey.shade700,
@@ -522,19 +523,19 @@ class TabbarState extends State<Tabbar> {
                         onTap: _onItemTapped,
                         items: const <BottomNavigationBarItem>[
                           BottomNavigationBarItem(
-                            icon: Icon(Icons.whatshot),
+                            icon: ImageIcon(AssetImage('assets/images/home.png'), size: 25),
                             label: '',
                           ),
                           BottomNavigationBarItem(
-                            icon: Icon(Icons.message),
+                            icon: ImageIcon(AssetImage('assets/images/chat.png'), size: 25),
                             label: '',
                           ),
                           BottomNavigationBarItem(
-                            icon: Icon(Icons.notifications),
+                            icon: ImageIcon(AssetImage('assets/images/bell.png'), size: 25),
                             label: '',
                           ),
                           BottomNavigationBarItem(
-                            icon: Icon(Icons.person),
+                            icon: ImageIcon(AssetImage('assets/images/user.png'), size: 25),
                             label: '',
                           ),
                         ],

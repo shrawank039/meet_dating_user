@@ -68,6 +68,20 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: primaryColor,
+      appBar: AppBar(
+        backgroundColor: primaryColor,
+        automaticallyImplyLeading: false,
+        title: Text(
+          'Profile'.tr().toString(),
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 1.0,
+          ),
+        ),
+        elevation: 0.0,
+      ),
       body: Container(
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(

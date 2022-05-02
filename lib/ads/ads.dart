@@ -5,7 +5,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 InterstitialAd? _interstitialAd;
 int _numInterstitialLoadAttempts = 0;
 const String testDevice = 'YOUR_DEVICE_ID';
-const bool test = true;
+const bool test = false;
 RewardedAd? _rewardedAd;
 int _numRewardedLoadAttempts = 0;
 const int maxFailedLoadAttempts = 3;
@@ -71,8 +71,8 @@ class Ads {
     if (!test) {
       RewardedAd.load(
           adUnitId: Platform.isAndroid
-              ? 'ca-app-pub-3940256099942544/5224354917'
-              : 'ca-app-pub-3940256099942544/1712485313',
+              ? 'ca-app-pub-5334606472230524/2134018175'
+              : 'ca-app-pub-5334606472230524/2134018175',
           request: request,
           rewardedAdLoadCallback: RewardedAdLoadCallback(
             onAdLoaded: (RewardedAd ad) {

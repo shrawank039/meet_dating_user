@@ -66,7 +66,7 @@ class _CallPageState extends State<CallPage> {
     _addAgoraEventHandlers();
     //await _engine.enableWebSdkInteroperability(true);
     VideoEncoderConfiguration configuration = VideoEncoderConfiguration();
-    configuration.dimensions = VideoDimensions(1280, 720);
+    configuration.dimensions = VideoDimensions(width: 480, height: 480);
     await _engine.setVideoEncoderConfiguration(configuration);
     await _engine.joinChannel(null, widget.channelName, null, 0);
   }
@@ -202,7 +202,7 @@ class _CallPageState extends State<CallPage> {
     if (widget.role == ClientRole.Broadcaster) {
       list.add(RtcLocalView.SurfaceView());
     }
-    _users.forEach((int uid) => list.add(RtcRemoteView.SurfaceView(uid: uid)));
+    _users.forEach((int uid) => list.add(RtcRemoteView.SurfaceView(uid: uid, channelId: widget.channelName,)));
     return list;
   }
 
