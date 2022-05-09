@@ -25,7 +25,12 @@ class _UserDOBState extends State<UserDOB> {
         duration: Duration(milliseconds: 50),
         child: Padding(
           padding: const EdgeInsets.only(top: 10.0),
-          child: FloatingActionButton(
+          child: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            color: secondryColor,
+            onPressed: () => Navigator.pop(context),
+          ),
+          /*FloatingActionButton(
             elevation: 10,
             child: IconButton(
               color: secondryColor,
@@ -38,7 +43,7 @@ class _UserDOBState extends State<UserDOB> {
             onPressed: () {
               Navigator.pop(context);
             },
-          ),
+          ),*/
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.startTop,

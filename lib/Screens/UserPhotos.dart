@@ -3,20 +3,23 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image/image.dart' as i;
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:meetapp/Screens/AllowLocation.dart';
 import 'package:meetapp/Screens/University.dart';
 import 'package:meetapp/util/color.dart';
 import 'package:meetapp/util/snackbar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../models/user_model.dart';
-
 class UserPhotos extends StatefulWidget {
+
   final Map<String, dynamic> userData;
 
   UserPhotos(this.userData);
@@ -33,6 +36,7 @@ class _UserPhotosState extends State<UserPhotos> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Colors.white,
@@ -44,7 +48,7 @@ class _UserPhotosState extends State<UserPhotos> {
           child: IconButton(
             color: secondryColor,
             icon: Icon(Icons.arrow_back_ios),
-            onPressed: () {},
+            onPressed: () => Navigator.pop(context),
           ),
         ),
       ),
@@ -107,50 +111,43 @@ class _UserPhotosState extends State<UserPhotos> {
                                   children: <Widget>[
                                     imageUrl!.length > index
                                         ?
-                                    Image.file(
-                                      File(imageUrl![index]),
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  .2,
+                                    CachedNetworkImage(
+                                      height: MediaQuery.of(context)
+                                          .size
+                                          .height *
+                                          .2,
                                       fit: BoxFit.cover,
+                                      imageUrl: imageUrl![index] ??
+                                          '',
+                                      placeholder: (context, url) =>
+                                          Center(
+                                            child: CupertinoActivityIndicator(
+                                              radius: 10,
+                                            ),
+                                          ),
+                                      errorWidget:
+                                          (context, url, error) => Center(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                          children: <Widget>[
+                                            Icon(
+                                              Icons.error,
+                                              color: Colors.black,
+                                              size: 25,
+                                            ),
+                                            Text(
+                                              "Enable to load"
+                                                  .tr()
+                                                  .toString(),
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
                                     )
-                                    // CachedNetworkImage(
-                                    //         height: MediaQuery.of(context)
-                                    //                 .size
-                                    //                 .height *
-                                    //             .2,
-                                    //         fit: BoxFit.cover,
-                                    //         imageUrl: imageUrl![index] ?? '',
-                                    //         placeholder: (context, url) =>
-                                    //             Center(
-                                    //           child: CupertinoActivityIndicator(
-                                    //             radius: 10,
-                                    //           ),
-                                    //         ),
-                                    //         errorWidget:
-                                    //             (context, url, error) => Center(
-                                    //           child: Column(
-                                    //             mainAxisAlignment:
-                                    //                 MainAxisAlignment.center,
-                                    //             children: <Widget>[
-                                    //               Icon(
-                                    //                 Icons.error,
-                                    //                 color: Colors.black,
-                                    //                 size: 25,
-                                    //               ),
-                                    //               Text(
-                                    //                 "Enable to load"
-                                    //                     .tr()
-                                    //                     .toString(),
-                                    //                 style: TextStyle(
-                                    //                   color: Colors.black,
-                                    //                 ),
-                                    //               )
-                                    //             ],
-                                    //           ),
-                                    //         ),
-                                    //       )
                                         : Container(),
                                     Align(
                                       alignment: Alignment.bottomRight,
@@ -184,8 +181,13 @@ class _UserPhotosState extends State<UserPhotos> {
                                                     size: 22,
                                                     color: Colors.white,
                                                   ),
-                                                  onTap: () =>
-                                                      source(context, false),
+                                                  onTap: () {
+                                                    if (imageUrl!.length>1){
+                                                      source(context, false);
+                                                    }else {
+                                                      source(context, true);
+                                                    }
+                                                  }
                                                 )),
                                     )
                                   ],
@@ -227,8 +229,13 @@ class _UserPhotosState extends State<UserPhotos> {
                                 fontWeight: FontWeight.bold),
                           ))),
                       onTap: () {
-                          widget.userData.addAll({'imageUrl': imageUrl});
-                        print(imageUrl);
+                         // widget.userData.addAll({'imageUrl': imageUrl});
+
+                        Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (context) =>
+                                  AllowLocation(widget.userData)));
                       },
                     ),
                   ),
@@ -394,7 +401,7 @@ class _UserPhotosState extends State<UserPhotos> {
               minimumAspectRatio: 1.0,
             ));
         if (croppedFile != null) {
-          await uploadFile(await compressimage(croppedFile), isProfilePicture);
+          await uploadFile(await compressImage(croppedFile), isProfilePicture);
         }
       }
       Navigator.pop(context);
@@ -404,30 +411,87 @@ class _UserPhotosState extends State<UserPhotos> {
   }
 
   Future uploadFile(File image, isProfilePicture) async {
+    User ?  user = FirebaseAuth.instance.currentUser;
     print(image.path+' '+image.hashCode.toString()+' '+isProfilePicture.toString());
+
+    Reference storageReference = FirebaseStorage.instance
+        .ref()
+        .child('users/${user!.uid}/${image.hashCode}.jpg');
+    UploadTask uploadTask = storageReference.putFile(image);
+
+    await uploadTask.whenComplete(() {
+      storageReference.getDownloadURL().then((fileURL) async {
+        Map<String, dynamic> updateObject = {
+          "Pictures": FieldValue.arrayUnion([
+            fileURL,
+          ])
+        };
+        try {
+          if (isProfilePicture) {
+            imageUrl!.insert(0, fileURL);
+            print("object");
+            await FirebaseFirestore.instance
+                .collection("Users")
+                .doc(user.uid)
+                .update(
+              {"Pictures": imageUrl},
+            );
+          } else {
+            await FirebaseFirestore.instance
+                .collection("Users")
+                .doc(user.uid)
+                .update(
+              updateObject,
+            );
+            imageUrl!.add(fileURL);
+          }
+          if (mounted) setState(() {});
+        } catch (err) {
+          print("Error: $err");
+        }
+      });
+    });
     setState(() {
-      imageUrl!.add(image.path);
     });
   }
 
   void _deletePicture(index) async {
+    User ?  user = FirebaseAuth.instance.currentUser;
+    if (imageUrl![index] != null) {
+      try {
+        Reference _ref = FirebaseStorage.instance
+            .refFromURL(imageUrl![index]);
+        print(_ref.fullPath);
+        await _ref.delete();
+      } catch (e) {
+        print(e);
+      }
+    }
     setState(() {
       imageUrl!.removeAt(index);
     });
+    var temp = [];
+    temp.add(imageUrl);
+    await FirebaseFirestore.instance
+        .collection("Users")
+        .doc("${user!.uid}")
+        .update(
+      {"Pictures": temp[0]},
+    );
   }
 
-  Future compressimage(File image) async {
+  Future compressImage(File image) async {
     const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
     Random _rnd = Random();
     String randomTxt = String.fromCharCodes(Iterable.generate(
         3, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
-    final tempdir = await getTemporaryDirectory();
-    final path = tempdir.path;
-    i.Image? imagefile = i.decodeImage(image.readAsBytesSync());
-    final compressedImagefile = File('$path$randomTxt.jpg')
-      ..writeAsBytesSync(i.encodeJpg(imagefile!, quality: 80));
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    i.Image? imageFile = i.decodeImage(image.readAsBytesSync());
+    final compressedImageFile = File('$path$randomTxt.jpg')
+      ..writeAsBytesSync(i.encodeJpg(imageFile!, quality: 80));
     // setState(() {
-    return compressedImagefile;
+    return compressedImageFile;
     // });
   }
 }

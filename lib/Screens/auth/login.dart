@@ -625,11 +625,11 @@ Future _setDataUser(User user) async {
     {
       'userId': user.uid,
       'UserName': user.displayName ?? '',
-      'Pictures': FieldValue.arrayUnion([
-        user.photoURL != null
-            ? user.photoURL! + '?width=9999'
-            : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxUC64VZctJ0un9UBnbUKtj-blhw02PeDEQIMOqovc215LWYKu&s'
-      ]),
+      // 'Pictures': FieldValue.arrayUnion([
+      //   user.photoURL != null
+      //       ? user.photoURL! + '?width=9999'
+      //       : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxUC64VZctJ0un9UBnbUKtj-blhw02PeDEQIMOqovc215LWYKu&s'
+      // ]),
       'phoneNumber': user.phoneNumber,
       'timestamp': FieldValue.serverTimestamp()
     },

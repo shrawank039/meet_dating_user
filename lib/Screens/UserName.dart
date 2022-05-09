@@ -46,7 +46,12 @@ class _UserNameState extends State<UserName> {
         duration: Duration(milliseconds: 50),
         child: Padding(
           padding: const EdgeInsets.only(top: 10.0),
-          child: FloatingActionButton(
+          child: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            color: secondryColor,
+            onPressed: () => Navigator.pop(context),
+          ),
+          /*FloatingActionButton(
             elevation: 10,
             child: IconButton(
               color: secondryColor,
@@ -59,7 +64,7 @@ class _UserNameState extends State<UserName> {
             onPressed: () {
               Navigator.pop(context);
             },
-          ),
+          ),*/
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.startTop,

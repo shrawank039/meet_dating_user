@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:meetapp/Screens/UserPhotos.dart';
 import 'package:meetapp/util/color.dart';
 import 'AllowLocation.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class University extends StatefulWidget {
   final Map<String, dynamic> userData;
+
   University(this.userData);
 
   @override
@@ -24,7 +26,12 @@ class _UniversityState extends State<University> {
         duration: Duration(milliseconds: 50),
         child: Padding(
           padding: const EdgeInsets.only(top: 10.0),
-          child: FloatingActionButton(
+          child: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            color: secondryColor,
+            onPressed: () => Navigator.pop(context),
+          ),
+          /*FloatingActionButton(
             elevation: 10,
             child: IconButton(
               color: secondryColor,
@@ -37,7 +44,7 @@ class _UniversityState extends State<University> {
             onPressed: () {
               Navigator.pop(context);
             },
-          ),
+          ),*/
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
@@ -126,7 +133,7 @@ class _UniversityState extends State<University> {
                                 context,
                                 CupertinoPageRoute(
                                     builder: (context) =>
-                                        AllowLocation(widget.userData)));
+                                        UserPhotos(widget.userData)));
                           },
                         ),
                       ),

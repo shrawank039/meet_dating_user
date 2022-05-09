@@ -203,7 +203,7 @@ class _VerificationState extends State<Verification> {
                 PhoneAuthCredential _phoneAuth = PhoneAuthProvider.credential(
                     verificationId: widget.smsVerificationCode, smsCode: code);
                 if (widget.updateNumber) {
-                  User user = await FirebaseAuth.instance.currentUser!;
+                  User user = FirebaseAuth.instance.currentUser!;
                   user
                       .updatePhoneNumber(_phoneAuth)
                       .then((_) => updateNumber())
@@ -214,52 +214,50 @@ class _VerificationState extends State<Verification> {
                   FirebaseAuth.instance
                       .signInWithCredential(_phoneAuth)
                       .then((authResult) {
-                    if (authResult != null) {
-                      showDialog(
-                          barrierDismissible: false,
-                          context: context,
-                          builder: (_) {
-                            Future.delayed(Duration(seconds: 2), () async {
-                              Navigator.pop(context);
-                              await _login.navigationCheck(
-                                  authResult.user!, context);
-                            });
-                            return Center(
-                                child: Container(
-                                    width: 180.0,
-                                    height: 200.0,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.rectangle,
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
-                                    child: Column(
-                                      children: <Widget>[
-                                        Image.asset(
-                                          "assets/auth/verified.jpg",
-                                          height: 100,
-                                        ),
-                                        Text(
-                                          "Verified\n Successfully".tr().toString(),
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              decoration: TextDecoration.none,
-                                              color: Colors.black,
-                                              fontSize: 20),
-                                        )
-                                      ],
-                                    )));
+                    showDialog(
+                        barrierDismissible: false,
+                        context: context,
+                        builder: (_) {
+                          Future.delayed(Duration(seconds: 2), () async {
+                            Navigator.pop(context);
+                            await _login.navigationCheck(
+                                authResult.user!, context);
                           });
-                      FirebaseFirestore.instance
-                          .collection('Users')
-                          .where('userId', isEqualTo: authResult.user!.uid)
-                          .get()
-                          .then((QuerySnapshot snapshot) async {
-                        if (snapshot.docs.length <= 0) {
-                          await setDataUser(authResult.user!);
-                        }
-                      });
-                    }
+                          return Center(
+                              child: Container(
+                                  width: 180.0,
+                                  height: 200.0,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      shape: BoxShape.rectangle,
+                                      borderRadius:
+                                          BorderRadius.circular(20)),
+                                  child: Column(
+                                    children: <Widget>[
+                                      Image.asset(
+                                        "assets/auth/verified.jpg",
+                                        height: 100,
+                                      ),
+                                      Text(
+                                        "Verified\n Successfully".tr().toString(),
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            decoration: TextDecoration.none,
+                                            color: Colors.black,
+                                            fontSize: 20),
+                                      )
+                                    ],
+                                  )));
+                        });
+                    FirebaseFirestore.instance
+                        .collection('Users')
+                        .where('userId', isEqualTo: authResult.user!.uid)
+                        .get()
+                        .then((QuerySnapshot snapshot) async {
+                      if (snapshot.docs.length <= 0) {
+                        await setDataUser(authResult.user!);
+                      }
+                    });
                   }).catchError((onError) {
                     CustomSnackbar.snackbar("$onError", _scaffoldKey);
                   });

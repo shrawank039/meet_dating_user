@@ -16,7 +16,7 @@ class SearchLocation extends StatefulWidget {
 
 //Add here your mapbox token under ""
 //String mapboxApi = "<----- Add here your mapbox token-->";
-String mapboxApi = "pk.eyJ1IjoicHJhbW9kODgzODgiLCJhIjoiY2t0bXhtM3Z2MGdvcTJ2cGJ6M2Mwa2kzcSJ9.iWuVONAHHL44t7N80yjYaA";
+final String mapboxApi = "pk.eyJ1IjoicHJhbW9kODgzODgiLCJhIjoiY2t0bXhtM3Z2MGdvcTJ2cGJ6M2Mwa2kzcSJ9.iWuVONAHHL44t7N80yjYaA";
 
 class _SearchLocationState extends State<SearchLocation> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -33,19 +33,10 @@ class _SearchLocationState extends State<SearchLocation> {
         duration: Duration(milliseconds: 50),
         child: Padding(
           padding: const EdgeInsets.only(top: 10.0),
-          child: FloatingActionButton(
-            elevation: 10,
-            child: IconButton(
-              color: secondryColor,
-              icon: Icon(Icons.arrow_back_ios),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-            backgroundColor: Colors.white38,
-            onPressed: () {
-              Navigator.pop(context);
-            },
+          child: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            color: secondryColor,
+            onPressed: () => Navigator.pop(context),
           ),
         ),
       ),
@@ -143,14 +134,13 @@ class _SearchLocationState extends State<SearchLocation> {
                                         _mapBoxPlace.geometry!.coordinates![0],
                                     'address': "${_mapBoxPlace.placeName}"
                                   },
-                                  'maximum_distance': 20,
+                                  'maximum_distance': 15000,
                                   'age_range': {
-                                    'min': "20",
+                                    'min': "18",
                                     'max': "50",
                                   },
                                 },
                               );
-
                               showWelcomDialog(context);
                               setUserData(widget.userData);
                             },

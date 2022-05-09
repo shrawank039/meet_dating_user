@@ -6,9 +6,7 @@ import 'package:meetapp/Screens/Tab.dart';
 import 'package:meetapp/Screens/seach_location.dart';
 import 'package:meetapp/util/color.dart';
 import 'package:easy_localization/easy_localization.dart';
-
 import 'UpdateLocation.dart';
-//import 'package:geolocator/geolocator.dart';
 
 class AllowLocation extends StatelessWidget {
   final Map<String, dynamic> userData;
@@ -27,7 +25,12 @@ class AllowLocation extends StatelessWidget {
             AnimatedOpacity(
               opacity: 1.0,
               duration: Duration(milliseconds: 50),
-              child: FloatingActionButton(
+              child: IconButton(
+                icon: Icon(Icons.arrow_back_ios),
+                color: secondryColor,
+                onPressed: () => Navigator.pop(context),
+              ),
+              /*FloatingActionButton(
                 heroTag: UniqueKey(),
                 elevation: 10,
                 child: IconButton(
@@ -41,7 +44,7 @@ class AllowLocation extends StatelessWidget {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-              ),
+              ),*/
             ),
             Padding(
               padding: const EdgeInsets.only(top: 20, right: 25),
@@ -162,15 +165,18 @@ class AllowLocation extends StatelessWidget {
                             'longitude': currentLocation['longitude'],
                             'address': currentLocation['PlaceName'],
                           },
-                          'maximum_distance': 20,
+                          'maximum_distance': 15000,
                           'age_range': {
-                            'min': "20",
+                            'min': "18",
                             'max': "50",
                           },
                         },
                       );
                       showWelcomDialog(context);
                       setUserData(userData);
+                    } else{
+                      CupertinoPageRoute(
+                          builder: (context) => SearchLocation(userData));
                     }
                   },
                 ),
@@ -184,13 +190,11 @@ class AllowLocation extends StatelessWidget {
 }
 
 Future setUserData(Map<String, dynamic> userData) async {
-  User ?  user = await FirebaseAuth.instance.currentUser;
-  //await FirebaseAuth.instance.currentUser().then((FirebaseUser user) async {
+  User ?  user = FirebaseAuth.instance.currentUser;
     await FirebaseFirestore.instance
         .collection("Users")
         .doc(user!.uid)
         .set(userData, SetOptions(merge: true));
-  //});
 }
 
 Future showWelcomDialog(context) async {

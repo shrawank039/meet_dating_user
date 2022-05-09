@@ -36,7 +36,6 @@ class _SettingsState extends State<Settings> {
   @override
   void dispose() {
    // _ads.disable(_ad);
-
     // _ad?.dispose();
     super.dispose();
 

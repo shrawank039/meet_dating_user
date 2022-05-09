@@ -696,9 +696,9 @@ class EditProfileState extends State<EditProfile> {
   void _deletePicture(index) async {
     if (widget.currentUser.imageUrl![index] != null) {
       try {
-        Reference _ref = await FirebaseStorage.instance
+        Reference _ref = FirebaseStorage.instance
             .refFromURL(widget.currentUser.imageUrl![index]);
-        print(_ref.fullPath);
+       // print(_ref.fullPath);
         await _ref.delete();
       } catch (e) {
         print(e);
@@ -712,8 +712,13 @@ class EditProfileState extends State<EditProfile> {
     await FirebaseFirestore.instance
         .collection("Users")
         .doc("${widget.currentUser.id}")
-        .set(
-      {"Pictures": temp[0]},
-    );
+    .update({
+      "Pictures": temp[0]
+    },);
+    //     .set(
+    //   {
+    //     "Pictures": temp[0]
+    //   },
+    // );
   }
 }
